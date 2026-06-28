@@ -256,10 +256,10 @@ footer b{color:#ffffff !important;-webkit-text-fill-color:#ffffff;}
     <h1>Plan de viaje para Papá · Chicagoland</h1>
     <p class="sub">Dos tramos de verano con base en Mundelein. Días mixtos —nunca dos intensos seguidos—, mezclando íconos de Chicago, naturaleza de Lake County, sabores locales y un toque griego.</p>
     <div class="facts">
-      <div class="fact"><b>17 jul – 7 ago</b>Dos tramos</div>
+      <div class="fact"><b>17 jul – 8 ago</b>Dos tramos</div>
       <div class="fact"><b>Mundelein</b>Casa base</div>
       <div class="fact"><b>Auto + Metra</b>Transporte</div>
-      <div class="fact"><b>Athena 🫒</b>Almuerzo fijo (dom)</div>
+      <div class="fact"><b>Athena 🫒</b>Almuerzo destacado (sáb 25)</div>
     </div>
   </div>
 </header>
@@ -480,7 +480,7 @@ function ta(q){return "https://www.tripadvisor.com/Search?q="+encodeURIComponent
 
 /* cada act con link (web oficial o Google Maps). pin:true => va al mapa. imgs:"clave" => carrusel real (ver IMG). */
 const DAYS=[
-/* ===== TRAMO 1 · 17-24 jul (25 = vuelo, sin plan) ===== */
+/* ===== TRAMO 1 · 17-25 jul (26 = vuelo de Papa, sin plan) ===== */
 {leg:1,date:"Vie 17 jul · llega PM",title:"Llegada suave",
  level:"relax",levelTxt:"Relajado",walk:"Poca caminata",zone:"lake",zoneTxt:"Lake County",
  transit:"auto",transitTxt:"Auto",cats:["aire","gastro"],
@@ -489,7 +489,7 @@ const DAYS=[
    {n:"Asentarse en la casa base",d:"Descanso tras el viaje y compras basicas.",pin:false},
    {n:"Paseo por Downtown Libertyville",d:"Calle principal con tiendas y heladerias, llano y facil. Barrio vecino de Mundelein.",pin:true,lat:42.2831,lng:-87.9534,gmap:"Downtown Libertyville IL",link:gm("Downtown Libertyville IL"),imgs:"libertyvilleDowntown"},
  ],
- meals:[{l:"Cena 🌙",t:"Algo ligero el primer dia.",ref:"JoJo's Shake Bar (diner retro)",link:gm("JoJo's Shake Bar 5 Jackson Ave Naperville IL")}]},
+ meals:[{l:"Cena 🌙",t:"Algo ligero, sin trasladarse lejos el primer dia tras el viaje.",ref:"Downtown Libertyville",link:gm("Downtown Libertyville IL restaurants")}]},
 
 {leg:1,date:"Sab 18 jul",title:"Jardines y orillas del lago",
  level:"mod",levelTxt:"Moderado",walk:"Caminata media (pavimentado)",zone:"cook",zoneTxt:"Cook County",
@@ -503,18 +503,14 @@ const DAYS=[
    {l:"Almuerzo",t:"Cafe del jardin o picnic al aire libre.",ref:"Cafe Chicago Botanic Garden",link:gm("Garden Cafe Chicago Botanic Garden")},
    {l:"Cena 🌙",t:"Terraza con jardin de luces.",ref:"Mockingbird Garden & Bar (East Dundee)",link:gm("Mockingbird Garden Bar 217 Barrington Ave East Dundee IL")}]},
 
-{leg:1,date:"Dom 19 jul",title:"★ GREEKTOWN: almuerzo en Athena",
- level:"mod",levelTxt:"Moderado",walk:"Caminata media",zone:"downtown",zoneTxt:"Downtown",
- transit:"metra",transitTxt:"Metra",cats:["gastro","griego","cultura"],fixed:true,
- transport:"<b>Metra MD-N</b> (Milwaukee District North) desde la estacion <b>Libertyville</b> a Union Station; Greektown a ~10-12 min a pie u Uber corto (<span class='verify'>verificar</span> horario domingo). Athena ofrece valet si prefieren <b>auto</b> (~70 min).",
+{leg:1,date:"Dom 19 jul",title:"En casa: cumpleaños de Lore (lomo al trapo)",
+ level:"relax",levelTxt:"Relajado",walk:"Sin caminata",zone:"lake",zoneTxt:"Lake County",
+ transit:"auto",transitTxt:"Auto",cats:["gastro"],
+ transport:"Dia en casa en Mundelein, sin desplazamientos. Plan mandatorio: se queda toda la familia.",
  acts:[
-   {n:"Almuerzo en Athena Restaurant",d:"212 S Halsted St. La terraza mas grande de Greektown, con techo retractil y fuente. Saganaki flameado, cordero, mezze. Mesas accesibles. ✦ EVENTO FIJO (domingo).",pin:true,fixedFlag:true,lat:41.8784,lng:-87.6476,gmap:"Athena Restaurant 212 S Halsted St Chicago IL 60661",link:"https://www.athenachicago.com/",imgs:"athenaFood",rating:{r:4.4,n:3414,src:"Yelp"}},
-   {n:"National Hellenic Museum",d:"Museo de la herencia griega en EE. UU., en pleno Greektown. Recorrido a ritmo propio.",pin:true,lat:41.8780,lng:-87.6475,gmap:"National Hellenic Museum Chicago",link:"https://nationalhellenicmuseum.org/",imgs:"nationalHellenic"},
-   {n:"Paseo por Halsted St (Greektown)",d:"Caminata corta por el barrio griego, fachadas y cafes.",pin:false,link:gm("Greektown Halsted St Chicago"),imgs:"greektown"},
+   {n:"Preparar el lomo al trapo",d:"Dia completo en familia cocinando en casa para celebrar el cumpleanos de Lore. Sin salidas planificadas.",pin:false},
  ],
- meals:[
-   {l:"Almuerzo ★",t:"Souvlaki, cordero, saganaki y baklava en la terraza de Athena.",ref:"Athena Restaurant",link:"https://www.athenachicago.com/"},
-   {l:"Cena 🌙",t:"Ligera tras el dia en la ciudad - algo cerca de casa.",ref:"Shakou (Barrington, rooftop)",link:gm("Shakou 121 W Main St Barrington IL")}]},
+ meals:[{l:"Cena especial 🌙🎂",t:"Lomo al trapo en casa por el cumpleanos de Lore.",ref:"En casa · Mundelein",link:gm(HOME.addr)}]},
 
 {leg:1,date:"Lun 20 jul",title:"Lunes tranquilo en Lake County",
  level:"relax",levelTxt:"Relajado",walk:"Caminata corta",zone:"lake",zoneTxt:"Lake County",
@@ -526,7 +522,7 @@ const DAYS=[
  ],
  meals:[
    {l:"Almuerzo",t:"Picnic junto al lago o cafe en Lake Forest.",ref:"Market Square Lake Forest",link:gm("Market Square Lake Forest IL restaurants")},
-   {l:"Cena 🌙",t:"Patio con domos y musica.",ref:"Hideaway Brew Garden (Hoffman Estates)",link:gm("Hideaway Brew Garden 5510 Prairie Stone Pkwy Hoffman Estates IL")}]},
+   {l:"Cena 🌙",t:"Cerca de casa, sin desplazamiento largo tras un dia relajado.",ref:"Shakou (Barrington, rooftop)",link:gm("Shakou 121 W Main St Barrington IL")}]},
 
 {leg:1,date:"Mar 21 jul",title:"Navy Pier: FlyOver y deep dish",
  level:"int",levelTxt:"Intenso",walk:"Mucha caminata",zone:"downtown",zoneTxt:"Downtown",
@@ -578,9 +574,22 @@ const DAYS=[
    {l:"Almuerzo",t:"Cafe del Art Institute o terraza en el Loop.",ref:"Art Institute cafe",link:gm("Art Institute of Chicago restaurant")},
    {l:"Cena 🌙",t:"Terraza junto al rio antes del Metra.",ref:"Riverwalk (terrazas)",link:gm("Chicago Riverwalk restaurants")}]},
 
-/* Sab 25 jul = vuelo de salida del Tramo 1 - sin actividades planificadas */
+{leg:1,date:"Sab 25 jul",title:"★ GREEKTOWN: almuerzo en Athena",
+ level:"mod",levelTxt:"Moderado",walk:"Caminata media",zone:"downtown",zoneTxt:"Downtown",
+ transit:"metra",transitTxt:"Metra",cats:["gastro","griego","cultura"],fixed:true,
+ transport:"<b>Metra MD-N</b> (Milwaukee District North) desde la estacion <b>Libertyville</b> a Union Station; Greektown a ~10-12 min a pie u Uber corto (<span class='verify'>verificar</span> horario sabado). Athena ofrece valet si prefieren <b>auto</b> (~70 min).",
+ acts:[
+   {n:"Almuerzo en Athena Restaurant",d:"212 S Halsted St. La terraza mas grande de Greektown, con techo retractil y fuente. Saganaki flameado, cordero, mezze. Mesas accesibles. ✦ PLAN DESTACADO (movido del 19 al 25 jul). <span class='verify'>verificar</span> ambiente/terraza en sabado.",pin:true,fixedFlag:true,lat:41.8784,lng:-87.6476,gmap:"Athena Restaurant 212 S Halsted St Chicago IL 60661",link:"https://www.athenachicago.com/",imgs:"athenaFood",rating:{r:4.4,n:3414,src:"Yelp"}},
+   {n:"National Hellenic Museum",d:"Museo de la herencia griega en EE. UU., en pleno Greektown. Recorrido a ritmo propio.",pin:true,lat:41.8780,lng:-87.6475,gmap:"National Hellenic Museum Chicago",link:"https://nationalhellenicmuseum.org/",imgs:"nationalHellenic"},
+   {n:"Paseo por Halsted St (Greektown)",d:"Caminata corta por el barrio griego, fachadas y cafes.",pin:false,link:gm("Greektown Halsted St Chicago"),imgs:"greektown"},
+ ],
+ meals:[
+   {l:"Almuerzo ★",t:"Souvlaki, cordero, saganaki y baklava en la terraza de Athena.",ref:"Athena Restaurant",link:"https://www.athenachicago.com/"},
+   {l:"Cena 🌙",t:"Ligera tras el dia en la ciudad - algo cerca de casa.",ref:"Shakou (Barrington, rooftop)",link:gm("Shakou 121 W Main St Barrington IL")}]},
 
-/* ===== TRAMO 2 · 31 jul - 6 ago (7 = vuelo) ===== */
+/* Dom 26 jul = vuelo de Papa - sin actividades planificadas */
+
+/* ===== TRAMO 2 · 31 jul - 7 ago (8 = vuelo de regreso a Colombia) ===== */
 {leg:2,date:"Vie 31 jul · regreso",title:"Reinicio relajado",
  level:"relax",levelTxt:"Relajado",walk:"Poca caminata",zone:"lake",zoneTxt:"Lake County",
  transit:"auto",transitTxt:"Auto",cats:["aire","gastro"],
@@ -626,18 +635,18 @@ const DAYS=[
  ],
  meals:[
    {l:"Almuerzo",t:"Cafe con terraza en Long Grove.",ref:"Downtown Long Grove",link:gm("Long Grove IL restaurants")},
-   {l:"Cena 🌙",t:"Mediterraneo en atrio de vidrio con hogar de lena.",ref:"Pella Signature (Burr Ridge)",link:gm("Pella Signature 720 Village Center Dr Burr Ridge IL")}]},
+   {l:"Cena 🌙",t:"Cerca de casa, sin desplazamiento largo tras un dia relajado.",ref:"Shakou (Barrington, rooftop)",link:gm("Shakou 121 W Main St Barrington IL")}]},
 
-{leg:2,date:"Mar 4 ago",title:"Vernon Hills + tacos premiados",
- level:"mod",levelTxt:"Moderado",walk:"Caminata media",zone:"lake",zoneTxt:"Lake County",
- transit:"auto",transitTxt:"Auto",cats:["compras","gastro","aire"],
- transport:"<b>Auto</b>, cerca de casa, con escapada a Geneva si hay animo (~60 min).",
+{leg:2,date:"Mar 4 ago",title:"Lake Geneva (Wisconsin): crucero por el lago y almuerzo",
+ level:"mod",levelTxt:"Moderado",walk:"Poca caminata",zone:"lake",zoneTxt:"Lake County",
+ transit:"auto",transitTxt:"Auto",cats:["aire","gastro"],
+ transport:"<b>Auto</b> a Lake Geneva, WI, ~55-60 min desde Mundelein.",
  acts:[
-   {n:"Hawthorn / Vernon Hills shopping",d:"Compras sin esfuerzo y cafe al aire libre en el barrio vecino de Vernon Hills.",pin:true,lat:42.2278,lng:-87.9489,gmap:"Hawthorn Mall Vernon Hills IL",link:gm("Hawthorn Mall Vernon Hills IL"),imgs:"hawthornMall"},
-   {n:"Bien Trucha (Geneva) - opcional",d:"Mexicano moderno aclamado, tacos de autor; sin reservas. Sabor local distinto. Solo si quieren la escapada.",pin:true,lat:41.8870,lng:-88.3050,gmap:"Bien Trucha 410 W State St Geneva IL",link:gm("Bien Trucha 410 W State St Geneva IL"),imgs:"genevaDowntown",rating:{r:4.7,n:105,src:"OpenTable"}},
+   {n:"Crucero por Geneva Lake",d:"Paseo en bote sentado por el lago, saliendo de los Riviera Docks en el centro de Lake Geneva - descanso ideal para la pierna. <span class='verify'>verificar</span> horario y precio del crucero (Lake Geneva Cruise Line).",pin:true,lat:42.5916,lng:-88.4334,gmap:"Riviera Docks Lake Geneva WI",link:gm("Lake Geneva Cruise Line Riviera Docks Lake Geneva WI")},
+   {n:"Centro de Lake Geneva",d:"Paseo corto y plano junto al muelle, tiendas y vista del lago. Ritmo a gusto.",pin:true,lat:42.5916,lng:-88.4334,gmap:"Downtown Lake Geneva WI",link:gm("Downtown Lake Geneva WI")},
  ],
  meals:[
-   {l:"Almuerzo",t:"Tacos de autor (si van a Geneva) o local en Vernon Hills.",ref:"Bien Trucha (Geneva)",link:gm("Bien Trucha 410 W State St Geneva IL")},
+   {l:"Almuerzo",t:"Frente al lago en el centro de Lake Geneva.",ref:"Restaurante junto al muelle (Lake Geneva, WI)",link:gm("restaurants lakefront Lake Geneva WI")},
    {l:"Cena 🌙",t:"Cerca de casa, rooftop sushi.",ref:"Shakou (Barrington)",link:gm("Shakou 121 W Main St Barrington IL")}]},
 
 {leg:2,date:"Mie 5 ago",title:"★ Skydeck del Willis Tower + el Bean",
@@ -653,19 +662,31 @@ const DAYS=[
    {l:"Almuerzo",t:"Terraza junto al rio en el Loop.",ref:"Riverwalk",link:gm("Chicago Riverwalk restaurants")},
    {l:"Cena 🌙",t:"Ultima gran cena de patio.",ref:"The James (Geneva) o Sogno (Wheaton)",link:gm("The James 317 S 3rd St Geneva IL")}]},
 
-{leg:2,date:"Jue 6 ago",title:"Despedida frente al lago",
+{leg:2,date:"Jue 6 ago",title:"Tarde tranquila junto al lago",
  level:"relax",levelTxt:"Relajado",walk:"Caminata corta",zone:"lake",zoneTxt:"Lake County",
  transit:"auto",transitTxt:"Auto",cats:["aire","gastro"],
- transport:"<b>Auto</b>, cerca de casa. Dia tranquilo antes de partir.",
+ transport:"<b>Auto</b>, cerca de casa. Dia tranquilo, sin trasladarse lejos.",
  acts:[
-   {n:"Atardecer en Independence Grove",d:"Volver al spot favorito del condado para despedirse, sendero plano junto al lago.",pin:true,lat:42.3211,lng:-87.9492,gmap:"Independence Grove Libertyville IL",link:gm("Independence Grove Forest Preserve Libertyville IL")},
-   {n:"Empacar + compras de ultimo minuto",d:"Llevarse productos griegos del mercado a casa.",pin:false},
+   {n:"Atardecer en Independence Grove",d:"Volver al spot favorito del condado, sendero plano junto al lago.",pin:true,lat:42.3211,lng:-87.9492,gmap:"Independence Grove Libertyville IL",link:gm("Independence Grove Forest Preserve Libertyville IL")},
+   {n:"Empacar (parte 1)",d:"Llevarse productos griegos del mercado a casa.",pin:false},
  ],
  meals:[
    {l:"Almuerzo",t:"Brunch mediterraneo favorito.",ref:"Libertyville / Vernon Hills",link:gm("brunch Libertyville IL")},
-   {l:"Cena 🌙",t:"Cena especial de despedida - la mejor del viaje.",ref:"Mockingbird Garden & Bar o Sogno",link:gm("Mockingbird Garden Bar East Dundee IL")}]},
+   {l:"Cena 🌙",t:"Ligera, cerca de casa.",ref:"Shakou (Barrington, rooftop)",link:gm("Shakou 121 W Main St Barrington IL")}]},
 
-/* Vie 7 ago = vuelo de salida - sin actividades planificadas */
+{leg:2,date:"Vie 7 ago · Papá con nosotros",title:"Último día con Papá: cierre en familia",
+ level:"relax",levelTxt:"Relajado",walk:"Caminata corta",zone:"lake",zoneTxt:"Lake County",
+ transit:"auto",transitTxt:"Auto",cats:["compras","gastro","aire"],
+ transport:"<b>Auto</b>, todo cerca de casa. Ultimo dia completo antes del vuelo de regreso a Colombia (sabado).",
+ acts:[
+   {n:"Hawthorn / Vernon Hills shopping",d:"Compras de ultimo minuto y regalos, sin esfuerzo, en el barrio vecino de Vernon Hills.",pin:true,lat:42.2278,lng:-87.9489,gmap:"Hawthorn Mall Vernon Hills IL",link:gm("Hawthorn Mall Vernon Hills IL"),imgs:"hawthornMall"},
+   {n:"Empacar (parte 2)",d:"Terminar maletas con calma antes del vuelo del sabado.",pin:false},
+ ],
+ meals:[
+   {l:"Almuerzo",t:"Cerca de casa, sin afanes.",ref:"Downtown Libertyville",link:gm("Downtown Libertyville IL restaurants")},
+   {l:"Cena especial 🌙",t:"Cena de despedida con Papá - la mejor del viaje.",ref:"Mockingbird Garden & Bar o Sogno",link:gm("Mockingbird Garden Bar East Dundee IL")}]},
+
+/* Sab 8 ago = vuelo de regreso a Colombia - sin actividades planificadas */
 ];
 
 /* etiquetas */
@@ -771,7 +792,7 @@ function renderItinerary(){
     if(d.leg!==currentLeg){
       currentLeg=d.leg;
       const h=document.createElement('div'); h.className='legday';
-      h.innerHTML='<h3>Tramo '+d.leg+(d.leg===1?' · 17-24 jul (25 = vuelo)':' · 31 jul-6 ago (7 = vuelo)')+'</h3>';
+      h.innerHTML='<h3>Tramo '+d.leg+(d.leg===1?' · 17-25 jul (26 = vuelo de Papa)':' · 31 jul-7 ago (8 = vuelo de regreso)')+'</h3>';
       cont.appendChild(h);
       const grid=document.createElement('div'); grid.className='days'; grid.dataset.leg=d.leg; cont.appendChild(grid);
     }
@@ -871,7 +892,8 @@ function buildMapList(){
 
 /* ===== CHECKLIST ===== */
 const PREP=[
-  {t:"Reservar almuerzo en Athena (domingo)",h:"★ Evento fijo · 212 S Halsted St · pedir terraza con techo retractil"},
+  {t:"Reservar almuerzo en Athena (sabado 25 jul)",h:"★ Plan destacado · 212 S Halsted St · pedir terraza con techo retractil"},
+  {t:"Confirmar crucero en Lake Geneva, WI",h:"Lake Geneva Cruise Line · Riviera Docks · verificar horario y precio (martes 4 ago)"},
   {t:"Comprar/planear boletos Metra MD-N",h:"Estacion Libertyville a Union Station · verificar horario de fin de semana y tarifa"},
   {t:"Comprar entradas FlyOver at Navy Pier",h:"Simulador de vuelo · verificar precio y franja horaria"},
   {t:"Reservar mesa en Giordano's Navy Pier",h:"Deep dish tarda ~45 min · ir con tiempo"},
