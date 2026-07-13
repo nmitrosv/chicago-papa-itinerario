@@ -1,0 +1,591 @@
+<title>Menú en casa · Visita de Papá, Mundelein</title>
+<style>
+  @media (prefers-color-scheme: dark) {
+    :root{
+      --bg:#171c13; --bg-alt:#1f2519; --card:#212a1c; --card-line:rgba(237,234,217,.14);
+      --ink:#edead9; --ink-soft:#b9c0aa; --bronze:#d99a5b; --lake:#a3b06a; --cook:#e2916a;
+      --chip-bg:#2a3320; --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root{
+    --bg:#eff1e6; --bg-alt:#e4e7d6; --card:#fbfaf3; --card-line:rgba(35,42,30,.12);
+    --ink:#232a1e; --ink-soft:#57604a; --bronze:#8a5a2b; --lake:#5c6b2c; --cook:#b6512a;
+    --chip-bg:#e9e4cd; --shadow:0 1px 2px rgba(35,42,30,.06), 0 8px 24px rgba(35,42,30,.08);
+  }
+  :root[data-theme="dark"]{
+    --bg:#171c13; --bg-alt:#1f2519; --card:#212a1c; --card-line:rgba(237,234,217,.14);
+    --ink:#edead9; --ink-soft:#b9c0aa; --bronze:#d99a5b; --lake:#a3b06a; --cook:#e2916a;
+    --chip-bg:#2a3320; --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+  }
+  :root[data-theme="light"]{
+    --bg:#eff1e6; --bg-alt:#e4e7d6; --card:#fbfaf3; --card-line:rgba(35,42,30,.12);
+    --ink:#232a1e; --ink-soft:#57604a; --bronze:#8a5a2b; --lake:#5c6b2c; --cook:#b6512a;
+    --chip-bg:#e9e4cd; --shadow:0 1px 2px rgba(35,42,30,.06), 0 8px 24px rgba(35,42,30,.08);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.5; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:Georgia,"Iowan Old Style","Palatino Linotype",serif;
+    font-weight:600; text-wrap:balance; color:var(--ink); margin:0;
+  }
+  .num{font-variant-numeric:tabular-nums;}
+  a{color:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 20px;}
+
+  /* ---- hero ---- */
+  header.hero{
+    background:
+      radial-gradient(1200px 400px at 15% -10%, rgba(138,90,43,.16), transparent 60%),
+      radial-gradient(900px 400px at 100% 0%, rgba(92,107,44,.14), transparent 55%),
+      var(--bg-alt);
+    border-bottom:1px solid var(--card-line);
+    padding:48px 0 32px;
+  }
+  .eyebrow{
+    font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--bronze); font-weight:700; margin-bottom:10px;
+  }
+  h1{font-size:clamp(1.7rem,4vw,2.5rem); line-height:1.15; max-width:16ch;}
+  .hero-sub{color:var(--ink-soft); max-width:62ch; margin-top:12px; font-size:1rem;}
+  .facts{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px;}
+  .fact{
+    background:var(--card); border:1px solid var(--card-line); border-radius:10px;
+    padding:10px 14px; box-shadow:var(--shadow); font-size:.85rem; min-width:130px;
+  }
+  .fact b{display:block; font-size:1rem; margin-bottom:2px;}
+
+  /* ---- nav ---- */
+  nav.quicknav{
+    position:sticky; top:0; z-index:10; background:var(--bg); border-bottom:1px solid var(--card-line);
+    backdrop-filter:blur(6px);
+  }
+  nav.quicknav .wrap{display:flex; gap:4px; overflow-x:auto; padding:10px 20px; scrollbar-width:none;}
+  nav.quicknav .wrap::-webkit-scrollbar{display:none;}
+  nav.quicknav a{
+    white-space:nowrap; font-size:.82rem; font-weight:600; padding:7px 13px; border-radius:999px;
+    color:var(--ink-soft); text-decoration:none; border:1px solid transparent;
+  }
+  nav.quicknav a:hover{border-color:var(--card-line); color:var(--ink);}
+
+  main{padding:40px 0 80px;}
+  section{margin-bottom:56px;}
+  .sec-head{margin-bottom:6px;}
+  .sec-head h2{font-size:clamp(1.3rem,2.6vw,1.7rem);}
+  .sec-lead{color:var(--ink-soft); max-width:70ch; margin-top:8px; font-size:.95rem;}
+
+  .leg-label{
+    display:inline-flex; align-items:center; gap:8px; font-size:.78rem; font-weight:700;
+    letter-spacing:.06em; text-transform:uppercase; color:var(--bronze); margin:34px 0 16px;
+  }
+  .leg-label::before{content:""; width:22px; height:2px; background:var(--bronze); display:inline-block;}
+
+  /* ---- day card ---- */
+  .day{
+    background:var(--card); border:1px solid var(--card-line); border-radius:14px;
+    box-shadow:var(--shadow); margin-bottom:18px; overflow:hidden;
+  }
+  .day-head{
+    display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 16px;
+    padding:18px 22px 14px; border-bottom:1px solid var(--card-line);
+  }
+  .day-head .date{font-family:Georgia,serif; font-size:1.15rem; font-weight:700;}
+  .day-head .title{color:var(--ink-soft); font-size:.92rem;}
+  .zone-tag{
+    margin-left:auto; font-size:.7rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+    padding:4px 10px; border-radius:999px; white-space:nowrap;
+  }
+  .zone-tag.lake{background:color-mix(in srgb, var(--lake) 16%, transparent); color:var(--lake);}
+  .zone-tag.cook{background:color-mix(in srgb, var(--cook) 16%, transparent); color:var(--cook);}
+  .day-note{
+    font-size:.85rem; color:var(--ink-soft); padding:10px 22px 0; font-style:italic;
+  }
+  .meals{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:0;
+    padding:16px 22px 20px;
+  }
+  .meal{padding:10px 14px 10px 0;}
+  .meal + .meal{border-left:1px solid var(--card-line); padding-left:16px;}
+  @media (max-width:640px){
+    .meal + .meal{border-left:none; border-top:1px solid var(--card-line); padding-left:0; padding-top:14px;}
+  }
+  .meal h4{font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--bronze); margin-bottom:6px;}
+  .meal .dish{font-weight:700; font-size:.97rem; margin-bottom:4px;}
+  .meal .desc{font-size:.87rem; color:var(--ink-soft); margin-bottom:6px;}
+  .meal .qty{
+    font-family:ui-monospace,"SF Mono","Cascadia Code",monospace; font-size:.74rem;
+    color:var(--ink-soft); background:var(--chip-bg); display:inline-block; padding:2px 8px;
+    border-radius:6px; font-variant-numeric:tabular-nums;
+  }
+
+  /* ---- shopping categories ---- */
+  .cat-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-top:20px;}
+  .cat-card{
+    background:var(--card); border:1px solid var(--card-line); border-radius:14px; box-shadow:var(--shadow);
+    padding:18px 20px;
+  }
+  .cat-card h3{font-size:1rem; margin-bottom:12px; display:flex; align-items:center; gap:8px;}
+  .cat-dot{width:10px; height:10px; border-radius:50%; display:inline-block; flex:none;}
+  .cat-card ul{list-style:none; margin:0; padding:0;}
+  .cat-card li{
+    display:flex; justify-content:space-between; gap:10px; font-size:.87rem;
+    padding:6px 0; border-bottom:1px dashed var(--card-line);
+  }
+  .cat-card li:last-child{border-bottom:none;}
+  .cat-card li span:last-child{
+    font-family:ui-monospace,"SF Mono",monospace; font-size:.8rem; color:var(--ink-soft);
+    font-variant-numeric:tabular-nums; white-space:nowrap;
+  }
+
+  /* ---- stores ---- */
+  .store-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; margin-top:20px;}
+  .store{
+    border-radius:14px; padding:20px 22px; box-shadow:var(--shadow); border:1px solid var(--card-line);
+    background:var(--card);
+  }
+  .store-head{display:flex; align-items:center; gap:10px; margin-bottom:4px;}
+  .store-head .swatch{width:14px; height:14px; border-radius:4px; flex:none;}
+  .store-head h3{font-size:1.05rem;}
+  .store-sub{font-size:.82rem; color:var(--ink-soft); margin-bottom:12px;}
+  .store ul{margin:0; padding-left:18px; font-size:.87rem;}
+  .store li{margin-bottom:5px;}
+  .store-note{
+    margin-top:12px; font-size:.8rem; color:var(--ink-soft); background:var(--chip-bg);
+    border-radius:8px; padding:8px 10px;
+  }
+
+  footer{
+    border-top:1px solid var(--card-line); padding:26px 0 60px; color:var(--ink-soft); font-size:.82rem;
+  }
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Mundelein, IL · 5 personas</div>
+    <h1>Menú de los días en casa</h1>
+    <p class="hero-sub">Complemento del itinerario de Papá en Chicagoland. Cubre los días sin plan en Downtown — cuando probablemente cocinemos en casa — con desayuno, almuerzo, cena y un snack para picar, siempre horneado, a la plancha, salteado o al vapor, nunca frito.</p>
+    <div class="facts">
+      <div class="fact"><b>17 jul – 8 ago</b>Dos tramos de estadía</div>
+      <div class="fact"><b>12 de 17 días</b>Se cocina en casa</div>
+      <div class="fact"><b>5 días</b>Downtown (fuera de casa)</div>
+      <div class="fact"><b>Sáb 18 jul 🎂</b>Cumpleaños de Lore</div>
+    </div>
+  </div>
+</header>
+
+<nav class="quicknav">
+  <div class="wrap">
+    <a href="#metodo">Método</a>
+    <a href="#tramo1">Tramo 1</a>
+    <a href="#tramo2">Tramo 2</a>
+    <a href="#categorias">Lista por categoría</a>
+    <a href="#supermercados">Lista por supermercado</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="metodo">
+    <div class="sec-head"><h2>Cómo se eligieron los días</h2></div>
+    <p class="sec-lead">El itinerario de referencia marca cada día con una zona: <b>Downtown</b>, <b>Lake County</b> o <b>Cook County</b>. Los 5 días con actividades en Downtown (mar 21 jul, vie 24 jul, sáb 25 jul, dom 2 ago, mié 5 ago) implican tren/Metra y comidas fuera. Los 12 días restantes — todos en Lake County o Cook County, cerca de casa — son los que se planean aquí. El itinerario no se modifica: solo se usó para decidir qué días cocinar.</p>
+  </section>
+
+  <section id="tramo1">
+    <div class="sec-head"><h2>Tramo 1 · 17–25 de julio</h2></div>
+    <p class="sec-lead">Todas las porciones están calculadas para <b>5 personas</b>. Las cantidades del plato principal se indican en cada comida.</p>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="date">Vie 17 jul</span>
+        <span class="title">Llegada suave — Papá llega por la tarde</span>
+        <span class="zone-tag lake">Lake County</span>
+      </div>
+      <div class="day-note">Cena ligera: llegan cansados del vuelo, sin trasladarse lejos.</div>
+      <div class="meals">
+        <div class="meal"><h4>Desayuno</h4><div class="dish">Huevos revueltos con espinaca</div><div class="desc">salteados con un chorrito de aceite de oliva, yogur griego con granola y frutos rojos aparte.</div><span class="qty">10 huevos · 750 g yogur</span></div>
+        <div class="meal"><h4>Almuerzo</h4><div class="dish">Ensalada mediterránea con pollo a la plancha</div><div class="desc">garbanzos, pepino, tomate, feta y aceitunas, pollo en tiras a la plancha.</div><span class="qty">650 g pollo · 300 g garbanzos</span></div>
+        <div class="meal"><h4>Cena</h4><div class="dish">Sopa de vegetales asados + tostas de hummus</div><div class="desc">zanahoria, calabacín, cebolla y tomate al horno, licuados; pan integral tostado con hummus.</div><span class="qty">~1 kg vegetales · 200 g hummus</span></div>
+        <div class="meal"><h4>Snack</h4><div class="dish">Hummus con crudités</div><div class="desc">bastones de zanahoria y apio, pita integral horneada.</div><span class="qty">200 g hummus</span></div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="date">Sáb 18 jul 🎂</span>
+        <span class="title">En casa: cumpleaños de Lore — lomo al trapo</span>
+        <span class="zone-tag lake">Lake County</span>
+      </div>
+      <div class="day-note">Día fijo del itinerario: toda la familia se queda en casa cocinando. La cena (lomo al trapo) ya está decidida — el resto del menú se arma liviano alrededor de ella.</div>
+      <div class="meals">
+        <div class="meal"><h4>Desayuno</h4><div class="dish">Tortilla española al horno</div><div class="desc">papa, cebolla y huevo horneados en molde (no frita), fruta picada aparte.</div><span class="qty">6 huevos · 500 g papa</span></div>
+        <div class="meal"><h4>Almuerzo</h4><div class="dish">Ensalada de rúcula, pera, nueces y queso de cabra</div><div class="desc">liviana a propósito para llegar con hambre a la cena grande.</div><span class="qty">200 g rúcula · 150 g queso de cabra</span></div>
+        <div class="meal"><h4>Cena especial</h4><div class="dish">Lomo al trapo con papas al horno y ensalada criolla</div><div class="desc">corte de res envuelto en tela y cocido lento; papas al horno; tomate, cebolla y pimiento crudos. Cierra con torta casera de naranja o zanahoria al horno.</div><span class="qty">2 kg carne · 1.2 kg papas</span></div>
+        <div class="meal"><h4>Snack</h4><div class="dish">Aceitunas, almendras y queso manchego</div><div class="desc">para picar mientras se cocina el lomo a fuego lento.</div><span class="qty">150 g aceitunas · 150 g almendras</span></div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="date">Dom 19 jul</span>
+        <span class="title">Jardines y orillas del lago (Botanic Garden, Glencoe)</span>
+        <span class="zone-tag cook">Cook County</span>
+      </div>
+      <div class="day-note">Almuerzo tipo picnic para llevar al jardín.</div>
+      <div class="meals">
+        <div class="meal"><h4>Desayuno</h4><div class="dish">Avena overnight con chía y plátano</div><div class="desc">avena remojada en leche toda la noche, canela, plátano en rodajas.</div><span class="qty">250 g avena · 500 ml leche</span></div>
+        <div class="meal"><h4>Almuerzo</h4><div class="dish">Wraps integrales de pavo, hummus y vegetales</div><div class="desc">tortilla integral, pavo en lonjas, hummus, lechuga y tomate — para picnic.</div><span class="qty">300 g pavo · 150 g hummus</span></div>
+        <div class="meal"><h4>Cena</h4><div class="dish">Pollo al horno con limón y hierbas</div><div class="desc">con quinoa y brócoli y zanahoria salteados.</div><span class="qty">900 g pollo · 250 g quinoa</span></div>
+        <div class="meal"><h4>Snack</h4><div class="dish">Fruta fresca con yogur y miel</div><div class="desc">para el regreso de la caminata.</div><span class="qty">500 g fruta</span></div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="date">Lun 20 jul</span>
+        <span class="title">Lunes tranquilo — Independence Grove, Lake Forest</span>
+        <span class="zone-tag lake">Lake County</span>
+      </div>
+      <div class="meals">
+        <div class="meal"><h4>Desayuno</h4><div class="dish">Tostadas integrales con palta y huevo pochado</div><div class="desc">pan integral, palta machacada, huevo pochado (agua, sin freír).</div><span class="qty">5 huevos · 3 paltas</span></div>
+        <div class="meal"><h4>Almuerzo</h4><div class="dish">Ensalada de quinoa, garbanzo, pepino y feta</div><div class="desc">picnic sencillo para Lake Forest, aliñada con limón y aceite de oliva.</div><span class="qty">200 g quinoa · 300 g garbanzo</span></div>
+        <div class="meal"><h4>Cena</h4><div class="dish">Salmón a la plancha con puré de coliflor</div><div class="desc">espárragos al vapor de acompañamiento.</div><span class="qty">750 g salmón · 500 g espárragos</span></div>
+        <div class="meal"><h4>Snack</h4><div class="dish">Frutos secos mixtos y fruta</div><div class="desc">para llevar en el paseo.</div><span class="qty">200 g frutos secos</span></div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="date">Mié 22 jul</span>
+        <span class="title">Día sereno + mercado griego (Columbus Food Market)</span>
+        <span class="zone-tag cook">Cook County</span>
+      </div>
+      <div class="day-note">El itinerario ya incluye una parada en el mercado griego de Des Plaines esa tarde — se aprovecha para comprar cordero, feta y aceitunas frescas para la cena.</div>
+      <div class="meals">
+        <div class="meal"><h4>Desayuno</h4><div class="dish">Yogur griego con miel, nueces y granola</div><div class="desc">simple, antes de salir a Old School Forest Preserve.</div><span class="qty">750 g yogur · 100 g nueces</span></div>
+        <div class="meal"><h4>Almuerzo</h4><div class="dish">Shakshuka</div><div class="desc">huevos pochados en salsa de tomate especiada con pimiento, comino y pimentón; pan integral.</div><span class="qty">10 huevos · 800 g tomate</span></div>
+        <div class="meal"><h4>Cena griega casera</h4><div class="dish">Cordero al horno con arroz pilaf y ensalada griega</div><div class="desc">cordero horneado con hierbas; pepino, tomate, cebolla morada, feta y aceitunas del mercado; tzatziki casero.</div><span class="qty">1 kg cordero · 300 g arroz</span></div>
+        <div class="meal"><h4>Snack</h4><div class="dish">Pita al horno con hummus y aceitunas del mercado</div><div class="desc">de lo comprado esa misma tarde.</div><span class="qty">5 pitas</span></div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="date">Jue 23 jul</span>
+        <span class="title">Illinois Beach State Park</span>
+        <span class="zone-tag lake">Lake County</span>
+      </div>
+      <div class="day-note">Almuerzo picnic para la playa.</div>
+      <div class="meals">
+        <div class="meal"><h4>Desayuno</h4><div class="dish">Batido verde + tostadas integrales</div><div class="desc">banana, espinaca, leche y mantequilla de maní licuados.</div><span class="qty">2 bananas · 100 g espinaca</span></div>
+        <div class="meal"><h4>Almuerzo</h4><div class="dish">Sandwiches de atún (sin mayonesa)</div><div class="desc">atún mezclado con yogur griego, apio picado, en pan integral, con vegetales crudos.</div><span class="qty">3 latas atún · 100 g yogur</span></div>
+        <div class="meal"><h4>Cena</h4><div class="dish">Camarones salteados con ajo y limón</div><div class="desc">arroz integral y brócoli/zanahoria al vapor.</div><span class="qty">750 g camarones · 250 g arroz</span></div>
+        <div class="meal"><h4>Snack</h4><div class="dish">Bastones de vegetales con guacamole</div><div class="desc">para el regreso de la arena.</div><span class="qty">3 paltas</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tramo2">
+    <div class="sec-head"><h2>Tramo 2 · 31 de julio – 7 de agosto</h2></div>
+    <p class="sec-lead">Segundo tramo tras el vuelo corto de Papá (dom 26 jul – vie 31 jul, sin plan). Mismas reglas: sin frituras, proteína distinta a la del día anterior, porciones para 5.</p>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="date">Vie 31 jul</span>
+        <span class="title">Reinicio relajado — Century Park, Vernon Hills</span>
+        <span class="zone-tag lake">Lake County</span>
+      </div>
+      <div class="meals">
+        <div class="meal"><h4>Desayuno</h4><div class="dish">Panqueques de avena y banana a la plancha</div><div class="desc">sin harina blanca, con frutos rojos.</div><span class="qty">250 g avena · 3 bananas</span></div>
+        <div class="meal"><h4>Almuerzo</h4><div class="dish">Pollo a la plancha con ensalada César saludable</div><div class="desc">aderezo a base de yogur en vez de mayonesa, crutones integrales caseros al horno.</div><span class="qty">650 g pollo</span></div>
+        <div class="meal"><h4>Cena</h4><div class="dish">Pollo al horno con hierbas provenzales</div><div class="desc">papas al horno y ensalada verde.</div><span class="qty">900 g pollo · 1 kg papas</span></div>
+        <div class="meal"><h4>Snack</h4><div class="dish">Hummus de remolacha con crudités</div><div class="desc">remolacha asada, garbanzo, tahini.</div><span class="qty">2 remolachas</span></div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="date">Sáb 1 ago</span>
+        <span class="title">Cook County: Skokie Lagoons y Evanston</span>
+        <span class="zone-tag cook">Cook County</span>
+      </div>
+      <div class="meals">
+        <div class="meal"><h4>Desayuno</h4><div class="dish">Tostadas con ricotta, miel y nueces</div><div class="desc">pan integral tostado, no frito.</div><span class="qty">250 g ricotta</span></div>
+        <div class="meal"><h4>Almuerzo</h4><div class="dish">Bowl mediterráneo de falafel al horno</div><div class="desc">falafel horneado (no frito), tabbouleh, hummus y pepino.</div><span class="qty">500 g garbanzo/falafel</span></div>
+        <div class="meal"><h4>Cena</h4><div class="dish">Tilapia a la plancha con couscous</div><div class="desc">vegetales asados: calabacín, pimiento y cebolla.</div><span class="qty">750 g tilapia · 250 g couscous</span></div>
+        <div class="meal"><h4>Snack</h4><div class="dish">Aceitunas, feta y tomates cherry</div><div class="desc">para picar antes de la cena.</div><span class="qty">150 g feta</span></div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="date">Lun 3 ago</span>
+        <span class="title">Lunes sereno — Lakewood Forest Preserve, Long Grove</span>
+        <span class="zone-tag lake">Lake County</span>
+      </div>
+      <div class="day-note">Almuerzo picnic para Long Grove.</div>
+      <div class="meals">
+        <div class="meal"><h4>Desayuno</h4><div class="dish">Tostadas francesas al horno con canela</div><div class="desc">pan integral bañado en huevo y horneado, no frito; fruta aparte.</div><span class="qty">4 huevos</span></div>
+        <div class="meal"><h4>Almuerzo</h4><div class="dish">Albóndigas de pavo al horno en salsa de tomate</div><div class="desc">con ensalada de hojas verdes.</div><span class="qty">700 g pavo molido</span></div>
+        <div class="meal"><h4>Cena</h4><div class="dish">Pasta integral con pollo desmenuzado y pesto</div><div class="desc">usa el pollo horneado sobrante del viernes; vegetales salteados; pesto casero de albahaca y nueces.</div><span class="qty">400 g pasta · 400 g pollo (sobrante)</span></div>
+        <div class="meal"><h4>Snack</h4><div class="dish">Yogur con granola y miel</div><div class="desc"></div><span class="qty">500 g yogur</span></div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="date">Mar 4 ago</span>
+        <span class="title">Excursión a Lake Geneva, Wisconsin</span>
+        <span class="zone-tag lake">Lake County</span>
+      </div>
+      <div class="day-note">Día de salida larga (~1 h de auto): desayuno antes de partir, almuerzo tipo picnic para llevar, cena ligera al volver.</div>
+      <div class="meals">
+        <div class="meal"><h4>Desayuno</h4><div class="dish">Huevos revueltos con vegetales</div><div class="desc">pimiento y cebolla salteados, antes de salir.</div><span class="qty">10 huevos</span></div>
+        <div class="meal"><h4>Almuerzo (para llevar)</h4><div class="dish">Ensalada de pasta integral con garbanzo y vinagreta de limón</div><div class="desc">se prepara la noche anterior, se lleva fría junto al lago.</div><span class="qty">300 g pasta · 300 g garbanzo</span></div>
+        <div class="meal"><h4>Cena</h4><div class="dish">Sopa de lentejas con vegetales</div><div class="desc">ligera al volver de la excursión, con ensalada simple.</div><span class="qty">300 g lentejas</span></div>
+        <div class="meal"><h4>Snack</h4><div class="dish">Barras de granola caseras al horno</div><div class="desc">avena, miel y frutos secos, para el camino.</div><span class="qty">200 g avena</span></div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="date">Jue 6 ago</span>
+        <span class="title">Tarde tranquila — Independence Grove al atardecer</span>
+        <span class="zone-tag lake">Lake County</span>
+      </div>
+      <div class="meals">
+        <div class="meal"><h4>Desayuno</h4><div class="dish">Yogur griego con fruta y granola</div><div class="desc"></div><span class="qty">750 g yogur</span></div>
+        <div class="meal"><h4>Almuerzo</h4><div class="dish">Tostadas con hummus, huevo horneado y vegetales asados</div><div class="desc">variante de shakshuka en tostada individual.</div><span class="qty">10 huevos</span></div>
+        <div class="meal"><h4>Cena</h4><div class="dish">Lomo de cerdo a la plancha con manzana y romero</div><div class="desc">puré de camote y vegetales al vapor.</div><span class="qty">800 g lomo de cerdo · 800 g camote</span></div>
+        <div class="meal"><h4>Snack</h4><div class="dish">Hummus con bastones de vegetales</div><div class="desc">mientras se empaca (parte 1).</div><span class="qty">200 g hummus</span></div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="date">Vie 7 ago 🎉</span>
+        <span class="title">Último día completo con Papá — cierre en familia</span>
+        <span class="zone-tag lake">Lake County</span>
+      </div>
+      <div class="day-note">Cena especial de despedida antes del vuelo de regreso del sábado.</div>
+      <div class="meals">
+        <div class="meal"><h4>Desayuno</h4><div class="dish">Frittata de vegetales al horno</div><div class="desc">espinaca, pimiento y cebolla; pan integral.</div><span class="qty">12 huevos</span></div>
+        <div class="meal"><h4>Almuerzo</h4><div class="dish">Ensalada mediterránea de garbanzo y atún</div><div class="desc">pepino, tomate y feta.</div><span class="qty">400 g garbanzo · 2 latas atún</span></div>
+        <div class="meal"><h4>Cena especial de despedida</h4><div class="dish">Paella al horno de pollo y mariscos</div><div class="desc">arroz, azafrán, pollo, camarón y mejillón, guisantes y pimiento — sofrito breve y terminada al horno, no frita. Postre: baklava o torta de yogur y limón.</div><span class="qty">400 g arroz · 300 g camarón · 400 g mejillón</span></div>
+        <div class="meal"><h4>Snack</h4><div class="dish">Tabla de quesos, aceitunas, frutos secos y uvas</div><div class="desc">para picar mientras se termina de empacar (parte 2).</div><span class="qty">150 g queso manchego</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="categorias">
+    <div class="sec-head"><h2>Lista de compras · por categoría</h2></div>
+    <p class="sec-lead">Consolidado de los 12 días, para 5 personas. Cantidades aproximadas — ajusta según apetito y lo que ya tengas en casa.</p>
+    <div class="cat-grid">
+
+      <div class="cat-card">
+        <h3><span class="cat-dot" style="background:var(--cook)"></span>Proteínas</h3>
+        <ul>
+          <li><span>Pechuga y presas de pollo</span><span>3.5 kg</span></li>
+          <li><span>Res para lomo al trapo (matambre)</span><span>2 kg</span></li>
+          <li><span>Cordero (pierna o chuletas)</span><span>1 kg</span></li>
+          <li><span>Lomo de cerdo</span><span>800 g</span></li>
+          <li><span>Pavo molido</span><span>700 g</span></li>
+          <li><span>Pavo en lonjas (fiambre)</span><span>300 g</span></li>
+          <li><span>Camarones pelados</span><span>1.1 kg</span></li>
+          <li><span>Mejillones congelados</span><span>450 g</span></li>
+          <li><span>Filete de salmón</span><span>800 g</span></li>
+          <li><span>Filete de tilapia</span><span>800 g</span></li>
+          <li><span>Atún en lata (agua)</span><span>5 latas</span></li>
+          <li><span>Huevos</span><span>~80 (7 doc.)</span></li>
+        </ul>
+      </div>
+
+      <div class="cat-card">
+        <h3><span class="cat-dot" style="background:var(--lake)"></span>Vegetales y frutas</h3>
+        <ul>
+          <li><span>Espinaca fresca</span><span>300 g</span></li>
+          <li><span>Rúcula / mezcla de hojas</span><span>3 bolsas</span></li>
+          <li><span>Lechuga romana</span><span>2 un.</span></li>
+          <li><span>Tomate (bola/roma)</span><span>2 kg</span></li>
+          <li><span>Tomate cherry</span><span>500 g</span></li>
+          <li><span>Pepino</span><span>2.5 kg</span></li>
+          <li><span>Pimientos variados</span><span>2 kg</span></li>
+          <li><span>Cebolla blanca/amarilla</span><span>1.5 kg</span></li>
+          <li><span>Cebolla morada</span><span>1 kg</span></li>
+          <li><span>Ajo</span><span>3 cabezas</span></li>
+          <li><span>Zanahoria</span><span>1.5 kg</span></li>
+          <li><span>Apio</span><span>1 atado</span></li>
+          <li><span>Coliflor</span><span>1 un. grande</span></li>
+          <li><span>Brócoli</span><span>1 kg</span></li>
+          <li><span>Espárragos</span><span>500 g</span></li>
+          <li><span>Calabacín (zucchini)</span><span>1 kg</span></li>
+          <li><span>Papa</span><span>3 kg</span></li>
+          <li><span>Camote (batata)</span><span>800 g</span></li>
+          <li><span>Remolacha</span><span>2 un.</span></li>
+          <li><span>Palta / aguacate</span><span>8 un.</span></li>
+          <li><span>Limón</span><span>12 un.</span></li>
+          <li><span>Banana</span><span>2 kg</span></li>
+          <li><span>Frutos rojos</span><span>1 kg</span></li>
+          <li><span>Pera, manzana, uva</span><span>~2 kg</span></li>
+          <li><span>Perejil fresco</span><span>1 atado</span></li>
+        </ul>
+      </div>
+
+      <div class="cat-card">
+        <h3><span class="cat-dot" style="background:var(--bronze)"></span>Lácteos</h3>
+        <ul>
+          <li><span>Yogur griego natural</span><span>3.6 kg (4 tarros)</span></li>
+          <li><span>Queso feta</span><span>700 g</span></li>
+          <li><span>Queso de cabra</span><span>150 g</span></li>
+          <li><span>Queso manchego</span><span>300 g</span></li>
+          <li><span>Queso ricotta</span><span>250 g</span></li>
+          <li><span>Leche</span><span>2 L</span></li>
+          <li><span>Mantequilla</span><span>200 g</span></li>
+        </ul>
+      </div>
+
+      <div class="cat-card">
+        <h3><span class="cat-dot" style="background:var(--ink-soft)"></span>Despensa</h3>
+        <ul>
+          <li><span>Garbanzo (lata/seco)</span><span>1.8 kg</span></li>
+          <li><span>Lentejas secas</span><span>300 g</span></li>
+          <li><span>Quinoa</span><span>500 g</span></li>
+          <li><span>Bulgur (tabbouleh)</span><span>200 g</span></li>
+          <li><span>Arroz integral</span><span>500 g</span></li>
+          <li><span>Arroz para paella</span><span>400 g</span></li>
+          <li><span>Couscous</span><span>250 g</span></li>
+          <li><span>Pasta integral</span><span>700 g</span></li>
+          <li><span>Avena en hojuelas</span><span>700 g</span></li>
+          <li><span>Pan integral</span><span>3–4 bolsas</span></li>
+          <li><span>Pan pita integral</span><span>2 paq.</span></li>
+          <li><span>Tortillas integrales</span><span>1 paq.</span></li>
+          <li><span>Granola</span><span>700 g</span></li>
+          <li><span>Aceite de oliva extra virgen</span><span>1.5 L</span></li>
+          <li><span>Vinagre balsámico / vino tinto</span><span>2 bot.</span></li>
+          <li><span>Miel</span><span>1 frasco</span></li>
+          <li><span>Mostaza dijon</span><span>1 frasco</span></li>
+          <li><span>Tahini</span><span>1 frasco</span></li>
+          <li><span>Nueces y almendras</span><span>500 g</span></li>
+          <li><span>Aceitunas (kalamata/verde)</span><span>500 g</span></li>
+          <li><span>Tomate triturado en lata</span><span>6 latas</span></li>
+          <li><span>Caldo de vegetales/pollo</span><span>1 L</span></li>
+          <li><span>Harina integral</span><span>400 g</span></li>
+          <li><span>Especias surtidas</span><span>orégano, comino, pimentón, azafrán, canela, tomillo, romero</span></li>
+        </ul>
+      </div>
+
+      <div class="cat-card">
+        <h3><span class="cat-dot" style="background:var(--cook)"></span>Otros</h3>
+        <ul>
+          <li><span>Mantequilla de maní</span><span>1 frasco</span></li>
+          <li><span>Chía</span><span>100 g</span></li>
+          <li><span>Filo dough (baklava casero)</span><span>1 paq.</span></li>
+          <li><span>Baklava (opción de comprar)</span><span>al gusto</span></li>
+          <li><span>Bolsas / hielera para picnic</span><span>4 excursiones</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="supermercados">
+    <div class="sec-head"><h2>Lista de compras · por supermercado</h2></div>
+    <p class="sec-lead">Distribuida entre los supermercados reales de Lake County según lo que conviene comprar en cada uno.</p>
+    <div class="store-grid">
+
+      <div class="store">
+        <div class="store-head"><span class="swatch" style="background:#0a6ebd"></span><h3>Costco</h3></div>
+        <div class="store-sub">Volumen y proteínas — Vernon Hills</div>
+        <ul>
+          <li>Pechuga y presas de pollo (3.5 kg)</li>
+          <li>Camarones congelados (1.1 kg)</li>
+          <li>Huevos (cartón grande, 7 doc.)</li>
+          <li>Yogur griego natural (tarros grandes ×4)</li>
+          <li>Filete de salmón</li>
+          <li>Aceite de oliva extra virgen (botella grande)</li>
+          <li>Nueces y almendras mixtas</li>
+          <li>Papa (bolsa 3 kg)</li>
+          <li>Banana (racimo grande)</li>
+          <li>Frutos rojos (paquete grande)</li>
+          <li>Queso manchego / bloque grande</li>
+          <li>Mantequilla</li>
+        </ul>
+      </div>
+
+      <div class="store">
+        <div class="store-head"><span class="swatch" style="background:#7e8b3d"></span><h3>Trader Joe's</h3></div>
+        <div class="store-sub">Mediterráneo, snacks y especialidades — Vernon Hills / Deerfield</div>
+        <ul>
+          <li>Queso feta y queso de cabra</li>
+          <li>Tahini y hummus de respaldo</li>
+          <li>Aceitunas kalamata</li>
+          <li>Pan pita integral</li>
+          <li>Falafel congelado (horneable)</li>
+          <li>Quinoa, couscous, bulgur</li>
+          <li>Granola y barras saludables</li>
+          <li>Mejillones congelados</li>
+          <li>Tomate triturado / salsa marinara</li>
+          <li>Filo dough o baklava preparado</li>
+          <li>Vegetales congelados variados</li>
+          <li>Especias mediterráneas (za'atar, sumac)</li>
+        </ul>
+      </div>
+
+      <div class="store">
+        <div class="store-head"><span class="swatch" style="background:#d96a3f"></span><h3>Target</h3></div>
+        <div class="store-sub">Despensa general — Mundelein / Vernon Hills</div>
+        <ul>
+          <li>Leche y queso ricotta</li>
+          <li>Arroz integral, arroz para paella, pasta integral</li>
+          <li>Avena en hojuelas y harina integral</li>
+          <li>Atún y lentejas/garbanzo en lata</li>
+          <li>Miel, mostaza dijon, vinagre balsámico</li>
+          <li>Especias básicas y sal</li>
+          <li>Tortillas integrales</li>
+          <li>Pavo molido y pavo en lonjas</li>
+          <li>Mantequilla de maní y chía</li>
+          <li>Bolsas y recipientes para picnic</li>
+        </ul>
+      </div>
+
+      <div class="store">
+        <div class="store-head"><span class="swatch" style="background:#8a5a2b"></span><h3>Jewel-Osco o Mariano's</h3></div>
+        <div class="store-sub">Carnicería, pescadería y produce fresca — Libertyville / Mundelein</div>
+        <ul>
+          <li>Corte de res para lomo al trapo (pedir en carnicería)</li>
+          <li>Cordero (pierna o chuletas)</li>
+          <li>Lomo de cerdo fresco</li>
+          <li>Filete de tilapia fresco</li>
+          <li>Vegetales frescos: tomate, pepino, espinaca, rúcula, brócoli, coliflor, espárragos, calabacín, remolacha, cebolla, ajo, pimiento, zanahoria, apio, perejil</li>
+          <li>Camote (batata)</li>
+          <li>Frutas frescas: limón, palta, pera, manzana, uva</li>
+          <li>Pan integral de panadería</li>
+          <li>Azafrán para la paella</li>
+        </ul>
+      </div>
+
+      <div class="store">
+        <div class="store-head"><span class="swatch" style="background:#5c6b2c"></span><h3>Columbus Food Market (Des Plaines)</h3></div>
+        <div class="store-sub">Mercado griego — ya está en el itinerario del miércoles 22 de julio por la tarde</div>
+        <ul>
+          <li>Cordero fresco (alternativa de calidad griega)</li>
+          <li>Feta griego auténtico y aceitunas</li>
+          <li>Pan pita fresco</li>
+          <li>Yogur griego artesanal y tzatziki</li>
+          <li>Baklava</li>
+        </ul>
+        <div class="store-note">Aprovecha la parada que ya está planeada esa tarde para llevar directamente los ingredientes de la cena griega del mismo día.</div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer><div class="wrap">
+  Menú preparado para la estadía de Papá en Mundelein, IL · Basado en el itinerario de referencia <a href="https://nmitrosv.github.io/chicago-papa-itinerario/">chicago-papa-itinerario</a>. Sin frituras — horneado, a la plancha, salteado o al vapor.
+</div></footer>
