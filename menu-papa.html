@@ -33,13 +33,26 @@ header.hero p.sub{margin-top:14px;max-width:66ch;font-size:18px;opacity:.95;}
 
 nav.quicknav{position:sticky;top:0;z-index:600;background:var(--white);
   border-bottom:1px solid var(--line);box-shadow:0 2px 10px -8px rgba(0,0,0,.2);}
-nav.quicknav .wrap{display:flex;gap:6px;overflow-x:auto;padding:8px 20px;scrollbar-width:none;}
+nav.quicknav .wrap{display:flex;gap:5px;overflow-x:auto;padding:7px 16px;scrollbar-width:none;}
 nav.quicknav .wrap::-webkit-scrollbar{display:none;}
-nav.quicknav a{white-space:nowrap;font-size:14px;font-weight:700;padding:9px 15px;border-radius:30px;
-  color:var(--ink-soft);text-decoration:none;transition:.15s;}
+nav.quicknav a{white-space:nowrap;font-size:13.5px;font-weight:700;padding:8px 13px;border-radius:30px;
+  color:var(--ink-soft);text-decoration:none;transition:.15s;flex:0 0 auto;}
 nav.quicknav a:hover{background:var(--aegean-l);color:var(--aegean-d);}
 nav.quicknav a.nav-crosslink{background:var(--aegean);color:#fff;font-weight:800;}
 nav.quicknav a.nav-crosslink:hover{background:var(--aegean-d);color:#fff;}
+@media(max-width:480px){
+  .wrap{padding:0 14px;}
+  nav.quicknav .wrap{padding:6px 10px;gap:4px;}
+  nav.quicknav a{padding:6px 10px;font-size:12px;}
+  header.hero{padding:28px 0 22px;}
+  header.hero p.sub{font-size:16px;}
+  .day-top{padding:13px 14px 10px;}
+  .day-body{padding:13px 14px 15px;gap:11px;}
+  .meal-box{padding:10px 12px;}
+  .meal-box .mdish{font-size:14.5px;}
+  .meal-box .mdesc{font-size:12.5px;}
+  .checkcard{padding:15px 16px;}
+}
 
 main{padding:26px 0 70px;}
 section{margin-bottom:48px;}
@@ -209,7 +222,7 @@ footer a{color:#9fc4dd;}
       </div>
       <div class="day-body">
         <div class="meals-grid">
-          <div class="meal-box"><span class="mtag">Desayuno</span><div class="mdish">Tostadas integrales con palta, jamón y huevo pochado</div><div class="mdesc">pan integral, palta machacada, una lonja de jamón serrano de buena calidad y huevos pochados (agua, sin freír).</div><span class="mqty">12 huevos · 200 g jamón · 3 paltas</span></div>
+          <div class="meal-box"><span class="mtag">Desayuno</span><div class="mdish">Tostadas de masa madre con palta, jamón y huevo pochado</div><div class="mdesc">pan de masa madre, palta machacada, una lonja de jamón serrano de buena calidad y huevos pochados (agua, sin freír).</div><span class="mqty">12 huevos · 200 g jamón · 3 paltas</span></div>
           <div class="meal-box"><span class="mtag">Almuerzo</span><div class="mdish">Ensalada de quinoa, garbanzo, pepino y feta</div><div class="mdesc">picnic sencillo para Lake Forest, aliñada con limón y aceite de oliva.</div><span class="mqty">200 g quinoa · 300 g garbanzo</span></div>
           <div class="meal-box"><span class="mtag">Cena</span><div class="mdish">Salmón a la plancha con puré de coliflor</div><div class="mdesc">puré de coliflor <span class="tm7">TM7</span>, espárragos al vapor de acompañamiento.</div><span class="mqty">750 g salmón · 500 g espárragos</span></div>
           <div class="meal-box"><span class="mtag">Snack</span><div class="mdish">Frutos secos mixtos y fruta</div><div class="mdesc">para llevar en el paseo.</div><span class="mqty">200 g frutos secos</span></div>
@@ -224,7 +237,7 @@ footer a{color:#9fc4dd;}
         <span class="badge zone">Cook County</span>
       </div>
       <div class="day-body">
-        <div class="transport">Día de mandado: además del mercado griego de Des Plaines por la tarde, se aprovecha para hacer las compras de supermercado de la semana (Costco/Target/Jewel-Osco). <b>Almuerzo por fuera</b> — no se cocina en casa ese mediodía. La cena usa lo comprado en el mercado griego (feta, aceitunas, pan pita) sin cordero: esta casa no come cordero, así que es carne de res.</div>
+        <div class="transport">Día de mandado: además del mercado griego de Des Plaines por la tarde, se aprovecha para hacer las compras de supermercado de la semana (Costco/Target/Garden Fresh). <b>Almuerzo por fuera</b> — no se cocina en casa ese mediodía. La cena usa lo comprado en el mercado griego (feta, aceitunas, pan pita) sin cordero: esta casa no come cordero, así que es carne de res.</div>
         <div class="meals-grid">
           <div class="meal-box"><span class="mtag">Desayuno</span><div class="mdish">Yogur griego con miel, nueces y granola + huevos duros</div><div class="mdesc">simple, antes de salir a Old School Forest Preserve; huevos duros aparte para la proteína.</div><span class="mqty">750 g yogur · 12 huevos</span></div>
           <div class="meal-box"><span class="mtag">Almuerzo</span><div class="mdish">Por fuera</div><div class="mdesc">se aprovecha la salida de mandado para almorzar afuera — no requiere compras ni preparación en casa.</div><span class="mqty">—</span></div>
@@ -243,8 +256,8 @@ footer a{color:#9fc4dd;}
       <div class="day-body">
         <div class="transport">Almuerzo picnic para la playa.</div>
         <div class="meals-grid">
-          <div class="meal-box"><span class="mtag">Desayuno</span><div class="mdish">Batido verde + tostadas integrales con huevos revueltos y jamón</div><div class="mdesc">banana, espinaca, leche y mantequilla de maní licuados <span class="tm7">TM7</span>; huevos revueltos con jamón serrano de buena calidad aparte.</div><span class="mqty">2 bananas · 12 huevos · 200 g jamón</span></div>
-          <div class="meal-box"><span class="mtag">Almuerzo</span><div class="mdish">Sandwiches de atún (sin mayonesa)</div><div class="mdesc">atún mezclado con yogur griego, apio picado, en pan integral, con vegetales crudos.</div><span class="mqty">3 latas atún · 100 g yogur</span></div>
+          <div class="meal-box"><span class="mtag">Desayuno</span><div class="mdish">Batido verde + tostadas de masa madre con huevos revueltos y jamón</div><div class="mdesc">banana, espinaca, leche y mantequilla de maní licuados <span class="tm7">TM7</span>; huevos revueltos con jamón serrano de buena calidad aparte.</div><span class="mqty">2 bananas · 12 huevos · 200 g jamón</span></div>
+          <div class="meal-box"><span class="mtag">Almuerzo</span><div class="mdish">Sandwiches de atún (sin mayonesa)</div><div class="mdesc">atún mezclado con yogur griego, apio picado, en pan de masa madre, con vegetales crudos.</div><span class="mqty">3 latas atún · 100 g yogur</span></div>
           <div class="meal-box"><span class="mtag">Cena</span><div class="mdish">Camarones salteados con ajo y limón</div><div class="mdesc">arroz integral y brócoli/zanahoria al vapor.</div><span class="mqty">750 g camarones · 250 g arroz</span></div>
           <div class="meal-box"><span class="mtag">Snack</span><div class="mdish">Bastones de vegetales con guacamole</div><div class="mdesc">para el regreso de la arena.</div><span class="mqty">3 paltas</span></div>
         </div>
@@ -265,7 +278,7 @@ footer a{color:#9fc4dd;}
       <div class="day-body">
         <div class="meals-grid">
           <div class="meal-box"><span class="mtag">Desayuno</span><div class="mdish">Panqueques de avena y banana a la plancha + huevos revueltos y jamón</div><div class="mdesc">sin harina blanca, con frutos rojos; huevos revueltos con jamón serrano de buena calidad aparte.</div><span class="mqty">250 g avena · 12 huevos · 200 g jamón</span></div>
-          <div class="meal-box"><span class="mtag">Almuerzo</span><div class="mdish">Pollo a la plancha con ensalada César saludable</div><div class="mdesc">aderezo a base de yogur en vez de mayonesa, crutones integrales caseros al horno.</div><span class="mqty">650 g pollo</span></div>
+          <div class="meal-box"><span class="mtag">Almuerzo</span><div class="mdish">Pollo a la plancha con ensalada César saludable</div><div class="mdesc">aderezo a base de yogur en vez de mayonesa, crutones de masa madre caseros al horno.</div><span class="mqty">650 g pollo</span></div>
           <div class="meal-box"><span class="mtag">Cena</span><div class="mdish">Pollo al horno con hierbas provenzales</div><div class="mdesc">papas al horno y ensalada verde.</div><span class="mqty">900 g pollo · 1 kg papas</span></div>
           <div class="meal-box"><span class="mtag">Snack</span><div class="mdish">Hummus de remolacha con crudités</div><div class="mdesc">remolacha asada, garbanzo, tahini <span class="tm7">TM7</span>.</div><span class="mqty">2 remolachas</span></div>
         </div>
@@ -280,7 +293,7 @@ footer a{color:#9fc4dd;}
       </div>
       <div class="day-body">
         <div class="meals-grid">
-          <div class="meal-box"><span class="mtag">Desayuno</span><div class="mdish">Tostadas con ricotta, miel y nueces + huevos duros</div><div class="mdesc">pan integral tostado, no frito; huevos duros aparte para la proteína.</div><span class="mqty">250 g ricotta · 12 huevos</span></div>
+          <div class="meal-box"><span class="mtag">Desayuno</span><div class="mdish">Tostadas con ricotta, miel y nueces + huevos duros</div><div class="mdesc">pan de masa madre tostado, no frito; huevos duros aparte para la proteína.</div><span class="mqty">250 g ricotta · 12 huevos</span></div>
           <div class="meal-box"><span class="mtag">Almuerzo</span><div class="mdish">Bowl mediterráneo de falafel al horno</div><div class="mdesc">falafel horneado <span class="tm7">TM7</span> (no frito), tabbouleh, hummus y pepino.</div><span class="mqty">500 g garbanzo/falafel</span></div>
           <div class="meal-box"><span class="mtag">Cena</span><div class="mdish">Tilapia a la plancha con couscous</div><div class="mdesc">vegetales asados: calabacín, pimiento y cebolla.</div><span class="mqty">750 g tilapia · 250 g couscous</span></div>
           <div class="meal-box"><span class="mtag">Snack</span><div class="mdish">Aceitunas, feta y tomates cherry</div><div class="mdesc">para picar antes de la cena.</div><span class="mqty">150 g feta</span></div>
@@ -297,7 +310,7 @@ footer a{color:#9fc4dd;}
       <div class="day-body">
         <div class="transport">Almuerzo picnic para Long Grove.</div>
         <div class="meals-grid">
-          <div class="meal-box"><span class="mtag">Desayuno</span><div class="mdish">Tostadas francesas al horno con canela + huevos revueltos</div><div class="mdesc">pan integral bañado en huevo y horneado, no frito; huevos revueltos aparte para completar la cuota.</div><span class="mqty">12 huevos</span></div>
+          <div class="meal-box"><span class="mtag">Desayuno</span><div class="mdish">Tostadas francesas al horno con canela + huevos revueltos</div><div class="mdesc">pan de masa madre bañado en huevo y horneado, no frito; huevos revueltos aparte para completar la cuota.</div><span class="mqty">12 huevos</span></div>
           <div class="meal-box"><span class="mtag">Almuerzo</span><div class="mdish">Albóndigas de pavo al horno en salsa de tomate</div><div class="mdesc">albóndigas <span class="tm7">TM7</span> con ensalada de hojas verdes.</div><span class="mqty">700 g pavo molido</span></div>
           <div class="meal-box"><span class="mtag">Cena</span><div class="mdish">Pasta integral con pollo desmenuzado y pesto</div><div class="mdesc">usa el pollo horneado sobrante del viernes; vegetales salteados; pesto casero <span class="tm7">TM7</span> de albahaca y nueces.</div><span class="mqty">400 g pasta · 400 g pollo (sobrante)</span></div>
           <div class="meal-box"><span class="mtag">Snack</span><div class="mdish">Yogur con granola y miel</div><div class="mdesc"></div><span class="mqty">500 g yogur</span></div>
@@ -347,7 +360,7 @@ footer a{color:#9fc4dd;}
       <div class="day-body">
         <div class="transport">Cena especial de despedida antes del vuelo de regreso del sábado.</div>
         <div class="meals-grid">
-          <div class="meal-box"><span class="mtag">Desayuno</span><div class="mdish">Frittata de vegetales y jamón al horno</div><div class="mdesc">espinaca, pimiento, cebolla y jamón serrano de buena calidad en cubitos; pan integral.</div><span class="mqty">12 huevos · 200 g jamón</span></div>
+          <div class="meal-box"><span class="mtag">Desayuno</span><div class="mdish">Frittata de vegetales y jamón al horno</div><div class="mdesc">espinaca, pimiento, cebolla y jamón serrano de buena calidad en cubitos; pan de masa madre.</div><span class="mqty">12 huevos · 200 g jamón</span></div>
           <div class="meal-box"><span class="mtag">Almuerzo</span><div class="mdish">Ensalada mediterránea de garbanzo y atún</div><div class="mdesc">pepino, tomate y feta.</div><span class="mqty">400 g garbanzo · 2 latas atún</span></div>
           <div class="meal-box"><span class="mtag">Cena especial de despedida</span><div class="mdish">Camarones al horno con tomate, feta y hierbas (Garides Saganaki)</div><div class="mdesc">camarones horneados en salsa de tomate con feta gratinada — más simple que una paella, igual de festivo. Con pan crocante y ensalada. Postre: baklava o torta de yogur y limón.</div><span class="mqty">900 g camarones · 400 g tomate triturado · 200 g feta</span></div>
           <div class="meal-box"><span class="mtag">Snack</span><div class="mdish">Tabla de quesos, aceitunas, frutos secos y uvas</div><div class="mdesc">para picar mientras se termina de empacar (parte 2).</div><span class="mqty">150 g queso manchego</span></div>
@@ -364,7 +377,7 @@ footer a{color:#9fc4dd;}
 
   <section id="compras22">
     <h2 class="sec">Lista de compras · mandado del 21 de julio (solo desayunos y snacks)</h2>
-    <p class="lead">Ese martes, además del mercado griego de Des Plaines por la tarde, se agregó al itinerario una parada de supermercado (Costco/Target/Jewel-Osco) — el miércoles 22 pasó a ser el día de Navy Pier en Downtown. Esta lista es exclusivamente para restockear <b>desayunos y snacks del 21 de julio en adelante</b> (incluyendo el desayuno del miércoles 22, ya que ese día se almuerza y cena fuera) — no incluye almuerzos ni cenas caseras, esos ya están cubiertos en la lista completa de abajo.</p>
+    <p class="lead">Ese martes, además del mercado griego de Des Plaines por la tarde, se agregó al itinerario una parada de supermercado (Costco/Target/Garden Fresh) — el miércoles 22 pasó a ser el día de Navy Pier en Downtown. Esta lista es exclusivamente para restockear <b>desayunos y snacks del 21 de julio en adelante</b> (incluyendo el desayuno del miércoles 22, ya que ese día se almuerza y cena fuera) — no incluye almuerzos ni cenas caseras, esos ya están cubiertos en la lista completa de abajo.</p>
     <div class="cat-grid" id="restock-grid"></div>
   </section>
 
@@ -457,7 +470,7 @@ const CATS=[
    {t:"Couscous",q:"250 g"},
    {t:"Pasta integral (platos + mac and cheese)",q:"900 g"},
    {t:"Avena en hojuelas",q:"700 g"},
-   {t:"Pan integral",q:"3–4 bolsas"},
+   {t:"Pan de masa madre",q:"3–4 bolsas"},
    {t:"Pan crocante o baguette (7 ago)",q:"1–2 piezas"},
    {t:"Pan pita integral",q:"2 paq."},
    {t:"Tortillas integrales",q:"1 paq."},
@@ -487,27 +500,32 @@ const CATS=[
 ];
 
 const STORES=[
- {name:"Costco",color:"#0a6ebd",sub:"Volumen y proteínas — Vernon Hills",items:[
-   "Pechuga y presas de pollo (2.5 kg)",
+ {name:"Costco",color:"#0a6ebd",sub:"Proteínas, fiambrería y volumen — Vernon Hills",items:[
+   "Corte de res para lomo al trapo (4 kg, sección de carnes)",
+   "Carne molida de res (para keftedes)",
+   "Lomo de cerdo",
+   "Pavo molido",
+   "Pavo en lonjas (fiambrería)",
+   "Jamón serrano de buena calidad (fiambrería, bloque grande)",
    "Camarones congelados (1.65 kg)",
+   "Filete de salmón",
+   "Filete de tilapia",
+   "Atún en lata (caja grande)",
    "Huevos (varios cartones grandes, ~13 doc. en total)",
    "Yogur griego natural (tarros grandes ×5)",
    "Yogur de fresa individual (cereal nocturno de Papá)",
-   "Jamón serrano de buena calidad (bloque grande)",
    "Jugo de naranja Tropicana (botellas grandes ×8)",
    "Agua con gas saborizada en lata (paquetes de 12 ×5)",
    "Coca-Cola Zero en lata (paquetes de 12 ×4)",
-   "Filete de salmón",
    "Queso brie en rueda grande",
+   "Queso manchego / bloque grande",
    "Aceite de oliva extra virgen (botella grande)",
    "Nueces y almendras mixtas",
-   "Papa (bolsa 3 kg)",
-   "Banana (racimo grande)",
-   "Frutos rojos (paquete grande)",
-   "Queso manchego / bloque grande",
    "Mantequilla",
  ]},
- {name:"Trader Joe's",color:"#566024",sub:"Mediterráneo, snacks y especialidades — Vernon Hills / Deerfield",items:[
+ {name:"Trader Joe's",color:"#566024",sub:"Panadería, mediterráneo y especialidades — Vernon Hills / Deerfield",items:[
+   "Pan de masa madre (3–4 bolsas por semana)",
+   "Pan crocante o baguette (para el 7 de agosto)",
    "Queso feta",
    "Tahini y hummus de respaldo",
    "Aceitunas kalamata",
@@ -520,32 +538,45 @@ const STORES=[
    "Vegetales congelados variados",
    "Especias mediterráneas (za'atar, sumac)",
  ]},
- {name:"Target",color:"#b84f24",sub:"Despensa general — Mundelein / Vernon Hills",items:[
+ {name:"Target",color:"#b84f24",sub:"Pollo y despensa general — Mundelein / Vernon Hills",items:[
+   "Pechuga y presas de pollo (2.5 kg)",
    "Leche y queso ricotta",
    "Queso cheddar rallado (mac and cheese)",
    "Pasta integral tipo codo (macarrón)",
    "Arroz integral, arroz blanco, pasta integral",
    "Avena en hojuelas y harina integral",
    "Cereal cinnamon roll y yogur de fresa para Papá (cena nocturna)",
-   "Atún y garbanzo en lata",
+   "Garbanzo en lata",
    "Miel, mostaza dijon, vinagre balsámico",
    "Especias básicas y sal",
    "Tortillas integrales",
-   "Pavo molido y pavo en lonjas",
    "Mantequilla de maní y chía",
    "Bolsas y recipientes para picnic",
  ]},
- {name:"Jewel-Osco o Mariano's",color:"#a87b1f",sub:"Carnicería, pescadería y produce fresca — Libertyville / Mundelein",items:[
-   "Corte de res para lomo al trapo (pedir en carnicería, 4 kg)",
-   "Carne molida de res (para keftedes)",
-   "Lomo de cerdo fresco",
-   "Filete de tilapia y salmón frescos",
-   "Jamón serrano de buena calidad (fiambrería)",
-   "Camarones frescos (para Garides Saganaki, 7 ago)",
-   "Vegetales frescos: tomate, pepino, espinaca, rúcula, brócoli, coliflor, espárragos, calabacín, remolacha, cebolla, ajo, pimiento, zanahoria, apio, perejil",
+ {name:"Garden Fresh",color:"#a87b1f",sub:"Frutas y verduras frescas",items:[
+   "Espinaca fresca",
+   "Rúcula / mezcla de hojas",
+   "Lechuga romana",
+   "Tomate (bola/roma) y tomate cherry",
+   "Pepino",
+   "Pimientos variados",
+   "Cebolla blanca/amarilla y morada",
+   "Ajo",
+   "Zanahoria",
+   "Apio",
+   "Coliflor",
+   "Brócoli",
+   "Espárragos",
+   "Calabacín (zucchini)",
+   "Papa",
    "Camote (batata)",
-   "Frutas frescas: limón, palta, manzana, uva",
-   "Pan integral de panadería y pan crocante/baguette",
+   "Remolacha",
+   "Palta / aguacate",
+   "Limón",
+   "Banana",
+   "Frutos rojos",
+   "Manzana y uva",
+   "Perejil fresco",
  ]},
  {name:"Columbus Food Market (Des Plaines)",color:"#566024",sub:"Mercado griego — ya está en el itinerario del martes 21 de julio por la tarde",note:"Aprovecha la parada que ya está planeada esa tarde para llevar directamente los ingredientes de la cena griega del mismo día. Esta casa no come cordero, así que se compra solo lo demás.",items:[
    "Feta griego auténtico y aceitunas",
@@ -600,7 +631,7 @@ const RESTOCK=[
  {t:"Uvas",q:"300 g"},
  {t:"Frutos rojos",q:"al gusto"},
  {t:"Avena en hojuelas",q:"450 g"},
- {t:"Pan integral",q:"2 bolsas"},
+ {t:"Pan de masa madre",q:"2 bolsas"},
  {t:"Granola",q:"300 g"},
  {t:"Miel",q:"revisar stock, reponer si falta"},
  {t:"Garbanzo (para hummus)",q:"300 g"},
