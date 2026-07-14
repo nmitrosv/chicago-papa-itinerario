@@ -48,9 +48,15 @@ nav.tabs .wrap{display:flex;gap:6px;flex-wrap:nowrap;padding:8px 20px;align-item
   flex:1 1 auto;white-space:nowrap;}
 .tab:hover{background:var(--aegean-l);color:var(--aegean-d);}
 .tab.active{background:var(--aegean);color:#fff;}
+.tab-link{font-size:15px;font-weight:800;border:none;color:#3a2c06;background:var(--gold);
+  padding:11px 18px;border-radius:30px;cursor:pointer;transition:.18s;min-height:46px;
+  flex:1 1 auto;white-space:nowrap;text-decoration:none;
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;}
+.tab-link:hover{background:var(--gold-d);color:#fff;}
 @media(max-width:480px){
   nav.tabs .wrap{padding:8px 10px;gap:4px;}
   .tab{padding:10px 8px;font-size:13px;min-height:42px;}
+  .tab-link{padding:10px 8px;font-size:13px;min-height:42px;}
 }
 
 section.view{display:none;padding:26px 0 70px;}
@@ -239,6 +245,8 @@ p.lead{color:#48606f !important;}
 .legday h3{color:#075284 !important;}
 .tab{color:#48606f !important;}
 .tab.active{color:#ffffff !important;}
+.tab-link{background-color:#d9a441 !important;color:#3a2c06 !important;}
+.tab-link:hover{background-color:#a87b1f !important;color:#ffffff !important;}
 .chip{color:#15242f !important;}
 .chip.on{color:#ffffff !important;}
 .chip.on.lvl-mod{color:#3a2c06 !important;}
@@ -268,6 +276,7 @@ footer b{color:#ffffff !important;-webkit-text-fill-color:#ffffff;}
   <button class="tab active" data-view="itin">📅 Itinerario</button>
   <button class="tab" data-view="map">🗺️ Mapa</button>
   <button class="tab" data-view="check">✅ Checklist</button>
+  <a class="tab-link" href="menu-papa.html">🍽️ Menú</a>
 </div></nav>
 
 <main class="wrap">
