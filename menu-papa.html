@@ -384,7 +384,7 @@ footer a{color:#9fc4dd;}
 
   <section id="compras">
     <h2 class="sec">Lista de compras</h2>
-    <p class="lead">Consolidado de los 12 días, para 5 personas (más el evento del 18 de julio). Es una sola lista: marca un ítem en cualquier vista o filtro y queda marcado en todos — el progreso se guarda automáticamente en este navegador. Agrupa por categoría o por supermercado, y filtra por cuándo lo necesitas: no hay mandado planeado entre la llegada (17 jul) y el martes 21, así que "Antes del 18 jul" cubre todo lo necesario para el evento y los días 18-20; el martes 21 hay una parada de supermercado (Costco/Target/Garden Fresh) además del mercado griego, así que "Mandado 21 jul" filtra solo los desayunos y snacks que hay que restockear ese día en adelante.</p>
+    <p class="lead">Consolidado de los 12 días, para 5 personas (más el evento del 18 de julio). Es una sola lista: marca un ítem en cualquier vista o filtro y queda marcado en todos — el progreso se guarda automáticamente en este navegador. Agrupa por categoría o por supermercado, y filtra por cuándo lo necesitas: no hay mandado planeado entre la llegada (17 jul) y el martes 21, así que "Antes del 18 jul" cubre todo lo necesario para el evento y los días 18-20; el martes 21 hay una parada de supermercado (Costco/Target/Garden Fresh) además del mercado griego, así que "Mandado 21 jul" filtra los desayunos y snacks que hay que restockear ese día en adelante, más lo que se compra ese mismo día en el mercado griego (aunque sea para la cena, por consistencia con la parada real).</p>
     <div class="overall-prog" id="overall-prog"></div>
     <div class="progbar"><div class="fill" id="overall-fill"></div></div>
     <div class="view-toggle">
@@ -394,7 +394,7 @@ footer a{color:#9fc4dd;}
     <div class="view-toggle" id="filter-toggle">
       <button class="vt-btn vt-filter" id="vf-all" data-filter="all" aria-pressed="true">Todos</button>
       <button class="vt-btn vt-filter" id="vf-pre18" data-filter="pre18" aria-pressed="false">Antes del 18 jul</button>
-      <button class="vt-btn vt-filter" id="vf-day21" data-filter="day21" aria-pressed="false">Mandado 21 jul (desayunos y snacks)</button>
+      <button class="vt-btn vt-filter" id="vf-day21" data-filter="day21" aria-pressed="false">Mandado 21 jul</button>
     </div>
     <div class="cat-grid" id="shop-grid"></div>
   </section>
@@ -496,8 +496,8 @@ const ITEMS=[
  {t:"Yogur de fresa (cereal nocturno de Papá, noches 18–20)",q:"3 porciones (~500 g)",cat:"Lácteos",store:"Target",when:["pre18"]},
  {t:"Yogur de fresa (cereal nocturno de Papá, 21 jul en adelante, ~13 noches)",q:"~2.2 kg (13 porciones)",cat:"Lácteos",store:"Target",when:["day21"]},
  {t:"Mantequilla",q:"300 g",cat:"Lácteos",store:"Costco"},
- {t:"Feta griego fresco (para keftedes, 21 jul)",q:"del mercado griego",cat:"Lácteos",store:"Columbus Food Market (Des Plaines)"},
- {t:"Yogur griego artesanal (tzatziki, 21 jul)",q:"del mercado griego",cat:"Lácteos",store:"Columbus Food Market (Des Plaines)"},
+ {t:"Feta griego fresco (para keftedes, 21 jul)",q:"del mercado griego",cat:"Lácteos",store:"Columbus Food Market (Des Plaines)",when:["day21"]},
+ {t:"Yogur griego artesanal (tzatziki, 21 jul)",q:"del mercado griego",cat:"Lácteos",store:"Columbus Food Market (Des Plaines)",when:["day21"]},
  // Despensa
  {t:"Garbanzo (hummus + ensalada de quinoa, antes del 18 jul)",q:"700 g",cat:"Despensa",store:"Target",when:["pre18"]},
  {t:"Garbanzo (para hummus, 21 jul en adelante)",q:"300 g",cat:"Despensa",store:"Target",when:["day21"]},
@@ -534,8 +534,8 @@ const ITEMS=[
  {t:"Falafel congelado (respaldo horneable)",q:"opcional, alternativa al casero",cat:"Despensa",store:"Trader Joe's"},
  {t:"Hummus preparado (respaldo)",q:"opcional, por si no da tiempo de hacerlo en la Thermomix",cat:"Despensa",store:"Trader Joe's"},
  {t:"Barras de granola compradas (respaldo)",q:"opcional, alternativa a las caseras",cat:"Despensa",store:"Trader Joe's"},
- {t:"Pan pita fresco (mercado griego, 21 jul)",q:"del mercado griego",cat:"Despensa",store:"Columbus Food Market (Des Plaines)"},
- {t:"Aceitunas frescas (mercado griego, 21 jul)",q:"del mercado griego",cat:"Despensa",store:"Columbus Food Market (Des Plaines)"},
+ {t:"Pan pita fresco (mercado griego, 21 jul)",q:"del mercado griego",cat:"Despensa",store:"Columbus Food Market (Des Plaines)",when:["day21"]},
+ {t:"Aceitunas frescas (mercado griego, 21 jul)",q:"del mercado griego",cat:"Despensa",store:"Columbus Food Market (Des Plaines)",when:["day21"]},
  // Otros
  {t:"Mantequilla de maní",q:"1 frasco",cat:"Otros",store:"Target"},
  {t:"Chía",q:"100 g",cat:"Otros",store:"Target"},
@@ -543,7 +543,7 @@ const ITEMS=[
  {t:"Baklava (opción de comprar en vez de hacerlo)",q:"al gusto, opcional",cat:"Otros",store:"Trader Joe's"},
  {t:"Bolsas / hielera para picnic",q:"4 excursiones",cat:"Otros",store:"Target"},
  {t:"Pizza para 5 niños (18 jul)",q:"pedir a domicilio, no es de super",cat:"Otros",store:"Logística (no es de supermercado)"},
- {t:"Baklava fresco (mercado griego, postre especial)",q:"opcional",cat:"Otros",store:"Columbus Food Market (Des Plaines)"},
+ {t:"Baklava fresco (mercado griego, postre especial)",q:"opcional",cat:"Otros",store:"Columbus Food Market (Des Plaines)",when:["day21"]},
 ];
 
 
