@@ -37,24 +37,19 @@ header.hero p.sub{margin-top:14px;max-width:66ch;font-size:18px;opacity:.95;}
   .fact{padding:10px 12px;}
 }
 
-nav.quicknav{position:sticky;top:0;z-index:600;background:var(--white);
-  border-bottom:1px solid var(--line);box-shadow:0 2px 10px -8px rgba(0,0,0,.2);}
-nav.quicknav .wrap{display:flex;gap:6px;overflow-x:auto;padding:7px 16px;scrollbar-width:none;}
-nav.quicknav .wrap::-webkit-scrollbar{display:none;}
-nav.quicknav a{white-space:nowrap;font-size:13.5px;font-weight:700;padding:8px 14px;border-radius:30px;
-  color:var(--ink-soft);text-decoration:none;transition:.15s;flex:0 0 auto;
+nav.quicknav{background:var(--white);border-bottom:1px solid var(--line);padding:12px 0;}
+nav.quicknav .wrap{display:flex;flex-wrap:wrap;gap:8px;}
+nav.quicknav a{white-space:nowrap;font-size:13.5px;font-weight:700;padding:9px 15px;border-radius:30px;
+  color:var(--ink-soft);text-decoration:none;transition:.15s;
   display:inline-flex;align-items:center;min-height:40px;}
 nav.quicknav a:hover{background:var(--aegean-l);color:var(--aegean-d);}
 nav.quicknav a.nav-crosslink{background:var(--aegean);color:#fff;font-weight:800;}
 nav.quicknav a.nav-crosslink:hover{background:var(--aegean-d);color:#fff;}
-/* spacer as a real flex item (not container padding) so iOS Safari's
-   horizontal-scroll-clips-trailing-padding quirk can't eat this gap */
-.nav-end-spacer{flex:0 0 10px;}
 @media(max-width:480px){
   .wrap{padding:0 14px;}
-  nav.quicknav .wrap{padding:6px 10px;gap:5px;}
-  nav.quicknav a{padding:7px 12px;font-size:12.5px;min-height:38px;}
-  .nav-end-spacer{flex:0 0 6px;}
+  nav.quicknav{padding:10px 0;}
+  nav.quicknav .wrap{gap:6px;}
+  nav.quicknav a{padding:8px 13px;font-size:12.5px;min-height:38px;}
   header.hero{padding:28px 0 22px;}
   header.hero p.sub{font-size:16px;}
   .day-top{padding:13px 14px 10px;}
@@ -121,9 +116,15 @@ p.lead{color:var(--ink-soft);max-width:76ch;margin-bottom:18px;}
 .ck.done .cklabel{text-decoration:line-through;color:var(--ink-soft);}
 .ck .ckhint{display:block;font-size:12.5px;color:var(--ink-soft);}
 .overall-prog{font-size:14px;font-weight:700;color:var(--aegean-d);margin-bottom:4px;}
+.view-toggle{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 6px;}
+.vt-btn{font-size:14px;font-weight:700;padding:9px 18px;border-radius:30px;border:1.5px solid var(--line);
+  background:#fff;color:var(--ink);cursor:pointer;transition:.15s;min-height:40px;}
+.vt-btn:hover{border-color:var(--aegean);}
+.vt-btn.active{background:var(--aegean);border-color:var(--aegean);color:#fff;}
+@media(max-width:480px){
+  .vt-btn{padding:8px 15px;font-size:13px;min-height:38px;}
+}
 
-.store-grid{display:grid;gap:18px;grid-template-columns:1fr;margin-top:8px;}
-@media(min-width:700px){.store-grid{grid-template-columns:1fr 1fr;}}
 .store-head{display:flex;align-items:center;gap:10px;margin-bottom:2px;}
 .store-head .swatch{width:13px;height:13px;border-radius:4px;flex:none;}
 .store-head h3{font-size:16.5px;font-weight:800;color:var(--ink);}
@@ -157,10 +158,8 @@ footer a{color:#9fc4dd;}
     <a href="#tramo2">Tramo 2</a>
     <a href="#compraspre18">Compras 18–20 jul</a>
     <a href="#compras22">Mandado 21 jul</a>
-    <a href="#categorias">Lista por categoría</a>
-    <a href="#supermercados">Lista por supermercado</a>
+    <a href="#compras">Lista de compras</a>
     <a class="nav-crosslink" href="index.html">📅 Itinerario completo</a>
-    <span class="nav-end-spacer" aria-hidden="true"></span>
   </div>
 </nav>
 
@@ -395,18 +394,16 @@ footer a{color:#9fc4dd;}
     <div class="cat-grid" id="restock-grid"></div>
   </section>
 
-  <section id="categorias">
-    <h2 class="sec">Lista de compras · por categoría</h2>
-    <p class="lead">Consolidado de los 12 días, para 5 personas (más el evento del 18 de julio). Marca los ítems según los vayas comprando — el progreso se guarda automáticamente en este navegador.</p>
+  <section id="compras">
+    <h2 class="sec">Lista de compras</h2>
+    <p class="lead">Consolidado de los 12 días, para 5 personas (más el evento del 18 de julio). Es una sola lista: marca un ítem en cualquiera de las dos vistas y queda marcado en ambas — el progreso se guarda automáticamente en este navegador. Alterna la vista según te convenga: por categoría para planear, o por supermercado para ir marcando mientras recorres cada tienda.</p>
     <div class="overall-prog" id="overall-prog"></div>
     <div class="progbar"><div class="fill" id="overall-fill"></div></div>
-    <div class="cat-grid" id="cat-grid"></div>
-  </section>
-
-  <section id="supermercados">
-    <h2 class="sec">Lista de compras · por supermercado</h2>
-    <p class="lead">La misma lista distribuida entre los supermercados reales de Lake County según lo que conviene comprar en cada uno. Checklist independiente de la de arriba — útil si prefieres marcar mientras recorres cada tienda.</p>
-    <div class="store-grid" id="store-grid"></div>
+    <div class="view-toggle">
+      <button class="vt-btn" id="vt-cat" data-view="cat" aria-pressed="true">Por categoría</button>
+      <button class="vt-btn" id="vt-store" data-view="store" aria-pressed="false">Por supermercado</button>
+    </div>
+    <div class="cat-grid" id="shop-grid"></div>
   </section>
 
 </main>
@@ -416,188 +413,130 @@ footer a{color:#9fc4dd;}
 </div></footer>
 
 <script>
-const CATS=[
- {name:"Proteínas",dot:"#b84f24",items:[
-   {t:"Pechuga y presas de pollo",q:"2.5 kg"},
-   {t:"Res para lomo al trapo (matambre)",q:"4 kg · 10 adultos"},
-   {t:"Carne molida de res (keftedes)",q:"800 g"},
-   {t:"Lomo de cerdo",q:"800 g"},
-   {t:"Pavo molido",q:"700 g"},
-   {t:"Pavo en lonjas (fiambre)",q:"450 g"},
-   {t:"Camarones pelados",q:"1.65 kg"},
-   {t:"Filete de salmón",q:"1.5 kg"},
-   {t:"Filete de tilapia",q:"800 g"},
-   {t:"Jamón serrano de buena calidad (desayunos)",q:"1.5 kg"},
-   {t:"Atún en lata (agua)",q:"5 latas"},
-   {t:"Huevos",q:"~148 (12-13 doc.)"},
- ]},
- {name:"Bebidas",dot:"#a87b1f",items:[
-   {t:"Jugo de naranja Tropicana (botella, solo desayuno)",q:"7 botellas grandes (89 oz) · +1 evento 18 jul"},
-   {t:"Agua con gas saborizada (lata)",q:"4 paq. de 12 (48 latas) · +1 paq. evento 18 jul"},
-   {t:"Coca-Cola Zero (lata)",q:"3 paq. de 12 (36 latas) · +1 paq. evento 18 jul"},
- ]},
- {name:"Vegetales y frutas",dot:"#566024",items:[
-   {t:"Espinaca fresca",q:"300 g"},
-   {t:"Rúcula / mezcla de hojas",q:"2 bolsas"},
-   {t:"Lechuga romana",q:"2 un."},
-   {t:"Tomate (bola/roma)",q:"2 kg"},
-   {t:"Tomate cherry",q:"500 g"},
-   {t:"Pepino",q:"2.5 kg"},
-   {t:"Pimientos variados",q:"2 kg"},
-   {t:"Cebolla blanca/amarilla",q:"1.8 kg"},
-   {t:"Cebolla morada",q:"1 kg"},
-   {t:"Ajo",q:"3 cabezas"},
-   {t:"Zanahoria",q:"1.5 kg"},
-   {t:"Apio",q:"1 atado"},
-   {t:"Coliflor",q:"1 un. grande"},
-   {t:"Brócoli",q:"500 g"},
-   {t:"Espárragos",q:"500 g"},
-   {t:"Calabacín (zucchini)",q:"1 kg"},
-   {t:"Papa",q:"3 kg"},
-   {t:"Camote (batata)",q:"800 g"},
-   {t:"Remolacha",q:"2 un."},
-   {t:"Palta / aguacate",q:"8 un."},
-   {t:"Limón",q:"12 un."},
-   {t:"Banana",q:"2 kg"},
-   {t:"Frutos rojos",q:"1 kg"},
-   {t:"Manzana y uva",q:"~1.5 kg"},
-   {t:"Perejil fresco",q:"1 atado"},
- ]},
- {name:"Lácteos",dot:"#d9a441",items:[
-   {t:"Yogur griego natural",q:"4.4 kg (5 tarros)"},
-   {t:"Queso feta",q:"900 g"},
-   {t:"Queso provolone (provoleta)",q:"600 g"},
-   {t:"Queso brie",q:"1 rueda (450 g)"},
-   {t:"Queso manchego",q:"300 g"},
-   {t:"Queso ricotta",q:"250 g"},
-   {t:"Queso cheddar (mac and cheese)",q:"500 g"},
-   {t:"Leche (cocina)",q:"2 L"},
-   {t:"Yogur de fresa (cereal nocturno de Papá, ~16 noches)",q:"~2.7 kg (16 porciones)"},
-   {t:"Mantequilla",q:"300 g"},
- ]},
- {name:"Despensa",dot:"#48606f",items:[
-   {t:"Garbanzo (lata/seco)",q:"1.8 kg"},
-   {t:"Quinoa",q:"250 g"},
-   {t:"Bulgur (tabbouleh)",q:"200 g"},
-   {t:"Arroz integral",q:"500 g"},
-   {t:"Arroz blanco (pilaf griego)",q:"400 g"},
-   {t:"Couscous",q:"250 g"},
-   {t:"Pasta integral (platos + mac and cheese)",q:"900 g"},
-   {t:"Avena en hojuelas",q:"700 g"},
-   {t:"Pan de masa madre",q:"3–4 bolsas"},
-   {t:"Pan crocante o baguette (7 ago)",q:"1–2 piezas"},
-   {t:"Pan pita integral",q:"2 paq."},
-   {t:"Tortillas integrales",q:"1 paq."},
-   {t:"Granola",q:"700 g"},
-   {t:"Cereal sabor cinnamon roll para Papá (10 pm, ~16 noches)",q:"1–2 cajas grandes"},
-   {t:"Aceite de oliva extra virgen",q:"1.5 L"},
-   {t:"Vinagre balsámico / vino tinto",q:"2 bot."},
-   {t:"Miel",q:"1 frasco grande"},
-   {t:"Mostaza dijon",q:"1 frasco"},
-   {t:"Tahini",q:"1 frasco"},
-   {t:"Nueces y almendras",q:"600 g"},
-   {t:"Aceitunas (kalamata/verde)",q:"700 g"},
-   {t:"Tomate triturado en lata",q:"6 latas"},
-   {t:"Caldo de vegetales/pollo",q:"1.5 L"},
-   {t:"Harina integral",q:"400 g"},
-   {t:"Pan rallado integral (opcional, gratinar)",q:"100 g"},
-   {t:"Especias surtidas",q:"orégano, comino, pimentón, canela, tomillo, romero, nuez moscada"},
- ]},
- {name:"Otros",dot:"#0a6ebd",items:[
-   {t:"Mantequilla de maní",q:"1 frasco"},
-   {t:"Chía",q:"100 g"},
-   {t:"Filo dough (baklava casero)",q:"1 paq."},
-   {t:"Baklava (opción de comprar)",q:"al gusto"},
-   {t:"Bolsas / hielera para picnic",q:"4 excursiones"},
-   {t:"Pizza para 5 niños (18 jul)",q:"pedir a domicilio, no es de super"},
- ]},
-];
+/* ===== LISTA DE COMPRAS UNIFICADA =====
+   Cada ítem tiene UNA sola entrada con su categoría y su supermercado.
+   Se puede agrupar por cualquiera de los dos ejes sin duplicar estado:
+   el checkbox se guarda por índice de ITEMS, no por vista. */
+const CAT_META={
+ "Proteínas":{dot:"#b84f24"},
+ "Bebidas":{dot:"#a87b1f"},
+ "Vegetales y frutas":{dot:"#566024"},
+ "Lácteos":{dot:"#d9a441"},
+ "Despensa":{dot:"#48606f"},
+ "Otros":{dot:"#0a6ebd"},
+};
+const CAT_ORDER=["Proteínas","Bebidas","Vegetales y frutas","Lácteos","Despensa","Otros"];
 
-const STORES=[
- {name:"Costco",color:"#0a6ebd",sub:"Proteínas, fiambrería y volumen — Vernon Hills",items:[
-   "Corte de res para lomo al trapo (4 kg, sección de carnes)",
-   "Carne molida de res (para keftedes)",
-   "Lomo de cerdo",
-   "Pavo molido",
-   "Pavo en lonjas (fiambrería)",
-   "Jamón serrano de buena calidad (fiambrería, bloque grande)",
-   "Camarones congelados (1.65 kg)",
-   "Filete de salmón",
-   "Filete de tilapia",
-   "Atún en lata (caja grande)",
-   "Huevos (varios cartones grandes, ~13 doc. en total)",
-   "Yogur griego natural (tarros grandes ×5)",
-   "Yogur de fresa individual (cereal nocturno de Papá)",
-   "Jugo de naranja Tropicana (botellas grandes ×8)",
-   "Agua con gas saborizada en lata (paquetes de 12 ×5)",
-   "Coca-Cola Zero en lata (paquetes de 12 ×4)",
-   "Queso brie en rueda grande",
-   "Queso manchego / bloque grande",
-   "Aceite de oliva extra virgen (botella grande)",
-   "Nueces y almendras mixtas",
-   "Mantequilla",
- ]},
- {name:"Trader Joe's",color:"#566024",sub:"Panadería, mediterráneo y especialidades — Vernon Hills / Deerfield",items:[
-   "Pan de masa madre (3–4 bolsas por semana)",
-   "Pan crocante o baguette (para el 7 de agosto)",
-   "Queso feta",
-   "Tahini y hummus de respaldo",
-   "Aceitunas kalamata",
-   "Pan pita integral",
-   "Falafel congelado (horneable)",
-   "Quinoa, couscous, bulgur",
-   "Granola y barras saludables",
-   "Tomate triturado / salsa marinara",
-   "Filo dough o baklava preparado",
-   "Vegetales congelados variados",
-   "Especias mediterráneas (za'atar, sumac)",
- ]},
- {name:"Target",color:"#b84f24",sub:"Pollo y despensa general — Mundelein / Vernon Hills",items:[
-   "Pechuga y presas de pollo (2.5 kg)",
-   "Leche y queso ricotta",
-   "Queso cheddar rallado (mac and cheese)",
-   "Pasta integral tipo codo (macarrón)",
-   "Arroz integral, arroz blanco, pasta integral",
-   "Avena en hojuelas y harina integral",
-   "Cereal cinnamon roll y yogur de fresa para Papá (cena nocturna)",
-   "Garbanzo en lata",
-   "Miel, mostaza dijon, vinagre balsámico",
-   "Especias básicas y sal",
-   "Tortillas integrales",
-   "Mantequilla de maní y chía",
-   "Bolsas y recipientes para picnic",
- ]},
- {name:"Garden Fresh",color:"#a87b1f",sub:"Frutas y verduras frescas",items:[
-   "Espinaca fresca",
-   "Rúcula / mezcla de hojas",
-   "Lechuga romana",
-   "Tomate (bola/roma) y tomate cherry",
-   "Pepino",
-   "Pimientos variados",
-   "Cebolla blanca/amarilla y morada",
-   "Ajo",
-   "Zanahoria",
-   "Apio",
-   "Coliflor",
-   "Brócoli",
-   "Espárragos",
-   "Calabacín (zucchini)",
-   "Papa",
-   "Camote (batata)",
-   "Remolacha",
-   "Palta / aguacate",
-   "Limón",
-   "Banana",
-   "Frutos rojos",
-   "Manzana y uva",
-   "Perejil fresco",
- ]},
- {name:"Columbus Food Market (Des Plaines)",color:"#566024",sub:"Mercado griego — ya está en el itinerario del martes 21 de julio por la tarde",note:"Aprovecha la parada que ya está planeada esa tarde para llevar directamente los ingredientes de la cena griega del mismo día. Esta casa no come cordero, así que se compra solo lo demás.",items:[
-   "Feta griego auténtico y aceitunas",
-   "Pan pita fresco",
-   "Yogur griego artesanal (para el tzatziki)",
-   "Baklava",
- ]},
+const STORE_META={
+ "Costco":{color:"#0a6ebd",sub:"Proteínas, fiambrería y volumen — Vernon Hills"},
+ "Trader Joe's":{color:"#566024",sub:"Panadería, mediterráneo y especialidades — Vernon Hills / Deerfield"},
+ "Target":{color:"#b84f24",sub:"Pollo y despensa general — Mundelein / Vernon Hills"},
+ "Garden Fresh":{color:"#a87b1f",sub:"Frutas y verduras frescas"},
+ "Columbus Food Market (Des Plaines)":{color:"#566024",sub:"Mercado griego — ya está en el itinerario del martes 21 de julio por la tarde",
+   note:"Aprovecha la parada que ya está planeada esa tarde para llevar directamente estos ingredientes frescos para la cena griega del mismo día. Esta casa no come cordero, así que se compra solo lo demás."},
+ "Logística (no es de supermercado)":{color:"#48606f",sub:"Pedidos y encargos, no se compran en tienda"},
+};
+const STORE_ORDER=["Costco","Trader Joe's","Target","Garden Fresh","Columbus Food Market (Des Plaines)","Logística (no es de supermercado)"];
+
+const ITEMS=[
+ // Proteínas
+ {t:"Pechuga y presas de pollo",q:"2.5 kg",cat:"Proteínas",store:"Target"},
+ {t:"Res para lomo al trapo (matambre)",q:"4 kg · 10 adultos",cat:"Proteínas",store:"Costco"},
+ {t:"Carne molida de res (keftedes)",q:"800 g",cat:"Proteínas",store:"Costco"},
+ {t:"Lomo de cerdo",q:"800 g",cat:"Proteínas",store:"Costco"},
+ {t:"Pavo molido",q:"700 g",cat:"Proteínas",store:"Costco"},
+ {t:"Pavo en lonjas (fiambre)",q:"450 g",cat:"Proteínas",store:"Costco"},
+ {t:"Camarones pelados",q:"1.65 kg",cat:"Proteínas",store:"Costco"},
+ {t:"Filete de salmón",q:"1.5 kg",cat:"Proteínas",store:"Costco"},
+ {t:"Filete de tilapia",q:"800 g",cat:"Proteínas",store:"Costco"},
+ {t:"Jamón serrano de buena calidad (desayunos)",q:"1.5 kg",cat:"Proteínas",store:"Costco"},
+ {t:"Atún en lata (agua)",q:"5 latas",cat:"Proteínas",store:"Costco"},
+ {t:"Huevos",q:"~148 (12-13 doc.)",cat:"Proteínas",store:"Costco"},
+ // Bebidas
+ {t:"Jugo de naranja Tropicana (botella, solo desayuno)",q:"7 botellas grandes (89 oz) · +1 evento 18 jul",cat:"Bebidas",store:"Costco"},
+ {t:"Agua con gas saborizada (lata)",q:"4 paq. de 12 (48 latas) · +1 paq. evento 18 jul",cat:"Bebidas",store:"Costco"},
+ {t:"Coca-Cola Zero (lata)",q:"3 paq. de 12 (36 latas) · +1 paq. evento 18 jul",cat:"Bebidas",store:"Costco"},
+ // Vegetales y frutas
+ {t:"Espinaca fresca",q:"300 g",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Rúcula / mezcla de hojas",q:"2 bolsas",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Lechuga romana",q:"2 un.",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Tomate (bola/roma)",q:"2 kg",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Tomate cherry",q:"500 g",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Pepino",q:"2.5 kg",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Pimientos variados",q:"2 kg",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Cebolla blanca/amarilla",q:"1.8 kg",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Cebolla morada",q:"1 kg",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Ajo",q:"3 cabezas",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Zanahoria",q:"1.5 kg",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Apio",q:"1 atado",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Coliflor",q:"1 un. grande",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Brócoli",q:"500 g",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Espárragos",q:"500 g",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Calabacín (zucchini)",q:"1 kg",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Papa",q:"3 kg",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Camote (batata)",q:"800 g",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Remolacha",q:"2 un.",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Palta / aguacate",q:"8 un.",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Limón",q:"12 un.",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Banana",q:"2 kg",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Frutos rojos",q:"1 kg",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Manzana y uva",q:"~1.5 kg",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Perejil fresco",q:"1 atado",cat:"Vegetales y frutas",store:"Garden Fresh"},
+ {t:"Vegetales congelados variados (respaldo)",q:"opcional",cat:"Vegetales y frutas",store:"Trader Joe's"},
+ // Lácteos
+ {t:"Yogur griego natural",q:"4.4 kg (5 tarros)",cat:"Lácteos",store:"Costco"},
+ {t:"Queso feta",q:"900 g",cat:"Lácteos",store:"Trader Joe's"},
+ {t:"Queso provolone (provoleta)",q:"600 g",cat:"Lácteos",store:"Costco"},
+ {t:"Queso brie",q:"1 rueda (450 g)",cat:"Lácteos",store:"Costco"},
+ {t:"Queso manchego",q:"300 g",cat:"Lácteos",store:"Costco"},
+ {t:"Queso ricotta",q:"250 g",cat:"Lácteos",store:"Target"},
+ {t:"Queso cheddar (mac and cheese)",q:"500 g",cat:"Lácteos",store:"Target"},
+ {t:"Leche (cocina)",q:"2 L",cat:"Lácteos",store:"Target"},
+ {t:"Yogur de fresa (cereal nocturno de Papá, ~16 noches)",q:"~2.7 kg (16 porciones)",cat:"Lácteos",store:"Target"},
+ {t:"Mantequilla",q:"300 g",cat:"Lácteos",store:"Costco"},
+ {t:"Feta griego fresco (para keftedes, 21 jul)",q:"del mercado griego",cat:"Lácteos",store:"Columbus Food Market (Des Plaines)"},
+ {t:"Yogur griego artesanal (tzatziki, 21 jul)",q:"del mercado griego",cat:"Lácteos",store:"Columbus Food Market (Des Plaines)"},
+ // Despensa
+ {t:"Garbanzo (lata/seco)",q:"1.8 kg",cat:"Despensa",store:"Target"},
+ {t:"Quinoa",q:"250 g",cat:"Despensa",store:"Trader Joe's"},
+ {t:"Bulgur (tabbouleh)",q:"200 g",cat:"Despensa",store:"Trader Joe's"},
+ {t:"Arroz integral",q:"500 g",cat:"Despensa",store:"Target"},
+ {t:"Arroz blanco (pilaf griego)",q:"400 g",cat:"Despensa",store:"Target"},
+ {t:"Couscous",q:"250 g",cat:"Despensa",store:"Trader Joe's"},
+ {t:"Pasta integral (platos + mac and cheese)",q:"900 g",cat:"Despensa",store:"Target"},
+ {t:"Avena en hojuelas",q:"700 g",cat:"Despensa",store:"Target"},
+ {t:"Pan de masa madre",q:"3–4 bolsas",cat:"Despensa",store:"Trader Joe's"},
+ {t:"Pan crocante o baguette (7 ago)",q:"1–2 piezas",cat:"Despensa",store:"Trader Joe's"},
+ {t:"Pan pita integral",q:"2 paq.",cat:"Despensa",store:"Trader Joe's"},
+ {t:"Tortillas integrales",q:"1 paq.",cat:"Despensa",store:"Target"},
+ {t:"Granola",q:"700 g",cat:"Despensa",store:"Trader Joe's"},
+ {t:"Cereal sabor cinnamon roll para Papá (10 pm, ~16 noches)",q:"1–2 cajas grandes",cat:"Despensa",store:"Target"},
+ {t:"Aceite de oliva extra virgen",q:"1.5 L",cat:"Despensa",store:"Costco"},
+ {t:"Vinagre balsámico / vino tinto",q:"2 bot.",cat:"Despensa",store:"Target"},
+ {t:"Miel",q:"1 frasco grande",cat:"Despensa",store:"Target"},
+ {t:"Mostaza dijon",q:"1 frasco",cat:"Despensa",store:"Target"},
+ {t:"Tahini",q:"1 frasco",cat:"Despensa",store:"Trader Joe's"},
+ {t:"Nueces y almendras",q:"600 g",cat:"Despensa",store:"Costco"},
+ {t:"Aceitunas (kalamata/verde)",q:"700 g",cat:"Despensa",store:"Trader Joe's"},
+ {t:"Tomate triturado en lata",q:"6 latas",cat:"Despensa",store:"Trader Joe's"},
+ {t:"Caldo de vegetales/pollo",q:"1.5 L",cat:"Despensa",store:"Target"},
+ {t:"Harina integral",q:"400 g",cat:"Despensa",store:"Target"},
+ {t:"Pan rallado integral (opcional, gratinar)",q:"100 g",cat:"Despensa",store:"Target"},
+ {t:"Especias surtidas",q:"orégano, comino, pimentón, canela, tomillo, romero, nuez moscada",cat:"Despensa",store:"Target"},
+ {t:"Especias mediterráneas (za'atar, sumac)",q:"opcional",cat:"Despensa",store:"Trader Joe's"},
+ {t:"Falafel congelado (respaldo horneable)",q:"opcional, alternativa al casero",cat:"Despensa",store:"Trader Joe's"},
+ {t:"Hummus preparado (respaldo)",q:"opcional, por si no da tiempo de hacerlo en la Thermomix",cat:"Despensa",store:"Trader Joe's"},
+ {t:"Barras de granola compradas (respaldo)",q:"opcional, alternativa a las caseras",cat:"Despensa",store:"Trader Joe's"},
+ {t:"Pan pita fresco (mercado griego, 21 jul)",q:"del mercado griego",cat:"Despensa",store:"Columbus Food Market (Des Plaines)"},
+ {t:"Aceitunas frescas (mercado griego, 21 jul)",q:"del mercado griego",cat:"Despensa",store:"Columbus Food Market (Des Plaines)"},
+ // Otros
+ {t:"Mantequilla de maní",q:"1 frasco",cat:"Otros",store:"Target"},
+ {t:"Chía",q:"100 g",cat:"Otros",store:"Target"},
+ {t:"Filo dough (baklava casero)",q:"1 paq.",cat:"Otros",store:"Trader Joe's"},
+ {t:"Baklava (opción de comprar en vez de hacerlo)",q:"al gusto, opcional",cat:"Otros",store:"Trader Joe's"},
+ {t:"Bolsas / hielera para picnic",q:"4 excursiones",cat:"Otros",store:"Target"},
+ {t:"Pizza para 5 niños (18 jul)",q:"pedir a domicilio, no es de super",cat:"Otros",store:"Logística (no es de supermercado)"},
+ {t:"Baklava fresco (mercado griego, postre especial)",q:"opcional",cat:"Otros",store:"Columbus Food Market (Des Plaines)"},
 ];
 
 const PREBUY=[
@@ -659,79 +598,72 @@ function loadChecked(){try{return JSON.parse(localStorage.getItem('menuShopCheck
 const checked=loadChecked();
 function saveChecked(){localStorage.setItem('menuShopChecked',JSON.stringify(checked));}
 
-function renderCats(){
-  const grid=document.getElementById('cat-grid'); grid.innerHTML='';
-  CATS.forEach((cat,ci)=>{
+function slug(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
+let shopView=localStorage.getItem('menuShopView')||'cat';
+
+function renderShopping(){
+  document.getElementById('vt-cat').classList.toggle('active', shopView==='cat');
+  document.getElementById('vt-store').classList.toggle('active', shopView==='store');
+  document.getElementById('vt-cat').setAttribute('aria-pressed', shopView==='cat');
+  document.getElementById('vt-store').setAttribute('aria-pressed', shopView==='store');
+  const grid=document.getElementById('shop-grid'); grid.innerHTML='';
+  const groupKey=shopView==='cat'?'cat':'store';
+  const order=shopView==='cat'?CAT_ORDER:STORE_ORDER;
+  const meta=shopView==='cat'?CAT_META:STORE_META;
+
+  const groups={};
+  ITEMS.forEach((it,idx)=>{ (groups[it[groupKey]]=groups[it[groupKey]]||[]).push(idx); });
+
+  order.forEach(name=>{
+    const idxs=groups[name];
+    if(!idxs||!idxs.length) return;
+    const m=meta[name];
+    const gid=slug(name);
     const card=document.createElement('div'); card.className='checkcard';
-    card.innerHTML=`<h3><span class="cat-dot" style="background:${cat.dot}"></span>${cat.name}</h3>
-      <div class="prog" id="cat-prog-${ci}"></div>
-      <div class="progbar"><div class="fill" id="cat-fill-${ci}"></div></div>`;
+    card.innerHTML = shopView==='cat'
+      ? `<h3><span class="cat-dot" style="background:${m.dot}"></span>${name}</h3>
+         <div class="prog" id="grp-prog-${gid}"></div>
+         <div class="progbar"><div class="fill" id="grp-fill-${gid}"></div></div>`
+      : `<div class="store-head"><span class="swatch" style="background:${m.color}"></span><h3>${name}</h3></div>
+         <div class="store-sub">${m.sub}</div>
+         <div class="prog" id="grp-prog-${gid}"></div>
+         <div class="progbar"><div class="fill" id="grp-fill-${gid}"></div></div>`;
     const ul=document.createElement('ul'); ul.className='cklist';
-    cat.items.forEach((it,ii)=>{
-      const key='cat-'+ci+'-'+ii;
+    idxs.forEach(idx=>{
+      const it=ITEMS[idx];
+      const key='item-'+idx;
       const done=!!checked[key];
       const li=document.createElement('li');
       li.innerHTML=`<label class="ck${done?' done':''}"><input type="checkbox" ${done?'checked':''}><span class="cklabel">${it.t}<span class="ckhint">${it.q}</span></span></label>`;
       li.querySelector('input').addEventListener('change',e=>{
         checked[key]=e.target.checked; saveChecked();
         li.querySelector('label').classList.toggle('done',e.target.checked);
-        updateCatProg(ci); updateOverallProg();
+        updateGroupProg(gid,idxs); updateShopOverallProg();
       });
       ul.appendChild(li);
     });
     card.appendChild(ul);
+    if(shopView==='store' && m.note){ const note=document.createElement('div'); note.className='store-note'; note.textContent=m.note; card.appendChild(note); }
     grid.appendChild(card);
+    updateGroupProg(gid,idxs);
   });
-  CATS.forEach((c,ci)=>updateCatProg(ci));
-  updateOverallProg();
+  updateShopOverallProg();
 }
-function updateCatProg(ci){
-  const cat=CATS[ci]; let done=0;
-  cat.items.forEach((it,ii)=>{ if(checked['cat-'+ci+'-'+ii]) done++; });
-  document.getElementById('cat-prog-'+ci).textContent=done+' de '+cat.items.length+' comprados';
-  document.getElementById('cat-fill-'+ci).style.width=(cat.items.length?done/cat.items.length*100:0)+'%';
+function updateGroupProg(gid,idxs){
+  let done=0; idxs.forEach(idx=>{ if(checked['item-'+idx]) done++; });
+  const p=document.getElementById('grp-prog-'+gid), f=document.getElementById('grp-fill-'+gid);
+  if(!p||!f) return;
+  p.textContent=done+' de '+idxs.length+' comprados';
+  f.style.width=(idxs.length?done/idxs.length*100:0)+'%';
 }
-function updateOverallProg(){
-  let done=0,tot=0;
-  CATS.forEach((cat,ci)=>{ cat.items.forEach((it,ii)=>{ tot++; if(checked['cat-'+ci+'-'+ii]) done++; }); });
-  document.getElementById('overall-prog').textContent=done+' de '+tot+' ítems comprados en total';
-  document.getElementById('overall-fill').style.width=(tot?done/tot*100:0)+'%';
+function updateShopOverallProg(){
+  let done=0;
+  ITEMS.forEach((it,idx)=>{ if(checked['item-'+idx]) done++; });
+  document.getElementById('overall-prog').textContent=done+' de '+ITEMS.length+' ítems comprados en total';
+  document.getElementById('overall-fill').style.width=(ITEMS.length?done/ITEMS.length*100:0)+'%';
 }
-
-function renderStores(){
-  const grid=document.getElementById('store-grid'); grid.innerHTML='';
-  STORES.forEach((store,si)=>{
-    const card=document.createElement('div'); card.className='checkcard';
-    let head=`<div class="store-head"><span class="swatch" style="background:${store.color}"></span><h3>${store.name}</h3></div>
-      <div class="store-sub">${store.sub}</div>
-      <div class="prog" id="store-prog-${si}"></div>
-      <div class="progbar"><div class="fill" id="store-fill-${si}"></div></div>`;
-    card.innerHTML=head;
-    const ul=document.createElement('ul'); ul.className='cklist';
-    store.items.forEach((txt,ii)=>{
-      const key='store-'+si+'-'+ii;
-      const done=!!checked[key];
-      const li=document.createElement('li');
-      li.innerHTML=`<label class="ck${done?' done':''}"><input type="checkbox" ${done?'checked':''}><span class="cklabel">${txt}</span></label>`;
-      li.querySelector('input').addEventListener('change',e=>{
-        checked[key]=e.target.checked; saveChecked();
-        li.querySelector('label').classList.toggle('done',e.target.checked);
-        updateStoreProg(si);
-      });
-      ul.appendChild(li);
-    });
-    card.appendChild(ul);
-    if(store.note){ const note=document.createElement('div'); note.className='store-note'; note.textContent=store.note; card.appendChild(note); }
-    grid.appendChild(card);
-  });
-  STORES.forEach((s,si)=>updateStoreProg(si));
-}
-function updateStoreProg(si){
-  const store=STORES[si]; let done=0;
-  store.items.forEach((it,ii)=>{ if(checked['store-'+si+'-'+ii]) done++; });
-  document.getElementById('store-prog-'+si).textContent=done+' de '+store.items.length+' comprados';
-  document.getElementById('store-fill-'+si).style.width=(store.items.length?done/store.items.length*100:0)+'%';
-}
+document.getElementById('vt-cat').addEventListener('click',()=>{ shopView='cat'; localStorage.setItem('menuShopView','cat'); renderShopping(); });
+document.getElementById('vt-store').addEventListener('click',()=>{ shopView='store'; localStorage.setItem('menuShopView','store'); renderShopping(); });
 
 function renderPrebuy(){
   const grid=document.getElementById('prebuy-grid'); grid.innerHTML='';
@@ -791,7 +723,7 @@ function updateRestockProg(){
   document.getElementById('restock-fill').style.width=(RESTOCK.length?done/RESTOCK.length*100:0)+'%';
 }
 
-renderCats(); renderStores(); renderPrebuy(); renderRestock();
+renderShopping(); renderPrebuy(); renderRestock();
 </script>
 </body>
 </html>
