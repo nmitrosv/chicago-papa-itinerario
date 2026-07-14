@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Menú en casa · Visita de Papá, Mundelein</title>
 <style>
 :root{
@@ -13,7 +18,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-
   color:var(--ink);background:var(--bone);line-height:1.55;font-size:17px;}
 @media (prefers-color-scheme:dark){:root{color-scheme:light only;}}
 .wrap{max-width:1180px;margin:0 auto;padding:0 20px;}
-a{color:inherit;}
+a{color:inherit;outline-offset:3px;}
+button:focus-visible, a:focus-visible, input:focus-visible{outline:3px solid var(--aegean-d);outline-offset:2px;}
 
 header.hero{background:linear-gradient(150deg,var(--aegean-d),var(--aegean) 60%,#2a8fd0);
   color:#fff;padding:40px 0 30px;position:relative;overflow:hidden;}
@@ -33,17 +39,22 @@ header.hero p.sub{margin-top:14px;max-width:66ch;font-size:18px;opacity:.95;}
 
 nav.quicknav{position:sticky;top:0;z-index:600;background:var(--white);
   border-bottom:1px solid var(--line);box-shadow:0 2px 10px -8px rgba(0,0,0,.2);}
-nav.quicknav .wrap{display:flex;gap:5px;overflow-x:auto;padding:7px 16px;scrollbar-width:none;}
+nav.quicknav .wrap{display:flex;gap:6px;overflow-x:auto;padding:7px 16px;scrollbar-width:none;}
 nav.quicknav .wrap::-webkit-scrollbar{display:none;}
-nav.quicknav a{white-space:nowrap;font-size:13.5px;font-weight:700;padding:8px 13px;border-radius:30px;
-  color:var(--ink-soft);text-decoration:none;transition:.15s;flex:0 0 auto;}
+nav.quicknav a{white-space:nowrap;font-size:13.5px;font-weight:700;padding:8px 14px;border-radius:30px;
+  color:var(--ink-soft);text-decoration:none;transition:.15s;flex:0 0 auto;
+  display:inline-flex;align-items:center;min-height:40px;}
 nav.quicknav a:hover{background:var(--aegean-l);color:var(--aegean-d);}
 nav.quicknav a.nav-crosslink{background:var(--aegean);color:#fff;font-weight:800;}
 nav.quicknav a.nav-crosslink:hover{background:var(--aegean-d);color:#fff;}
+/* spacer as a real flex item (not container padding) so iOS Safari's
+   horizontal-scroll-clips-trailing-padding quirk can't eat this gap */
+.nav-end-spacer{flex:0 0 10px;}
 @media(max-width:480px){
   .wrap{padding:0 14px;}
-  nav.quicknav .wrap{padding:6px 10px;gap:4px;}
-  nav.quicknav a{padding:6px 10px;font-size:12px;}
+  nav.quicknav .wrap{padding:6px 10px;gap:5px;}
+  nav.quicknav a{padding:7px 12px;font-size:12.5px;min-height:38px;}
+  .nav-end-spacer{flex:0 0 6px;}
   header.hero{padding:28px 0 22px;}
   header.hero p.sub{font-size:16px;}
   .day-top{padding:13px 14px 10px;}
@@ -123,6 +134,8 @@ p.lead{color:var(--ink-soft);max-width:76ch;margin-bottom:18px;}
 footer{background:var(--ink);color:#b8c8d4;padding:30px 0 40px;font-size:13.5px;line-height:1.6;}
 footer a{color:#9fc4dd;}
 </style>
+</head>
+<body>
 
 <header class="hero">
   <div class="wrap">
@@ -147,6 +160,7 @@ footer a{color:#9fc4dd;}
     <a href="#categorias">Lista por categoría</a>
     <a href="#supermercados">Lista por supermercado</a>
     <a class="nav-crosslink" href="index.html">📅 Itinerario completo</a>
+    <span class="nav-end-spacer" aria-hidden="true"></span>
   </div>
 </nav>
 
@@ -779,3 +793,5 @@ function updateRestockProg(){
 
 renderCats(); renderStores(); renderPrebuy(); renderRestock();
 </script>
+</body>
+</html>
