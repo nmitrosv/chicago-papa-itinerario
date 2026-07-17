@@ -207,11 +207,106 @@ footer b{color:#fff;}
 footer .wrap{display:flex;flex-direction:column;gap:8px;}
 footer a{color:#9fc4dd;}
 
+/* ===== Franja de acceso al Calendario ===== */
+.calstrip{background:var(--aegean-l);border-bottom:1px solid var(--line);}
+.calstrip .wrap{padding:12px 20px;display:flex;justify-content:center;}
+.calbtn{font-size:15px;font-weight:800;border:1.5px solid var(--aegean);background:var(--white);color:var(--aegean-d);
+  padding:11px 22px;border-radius:30px;cursor:pointer;transition:.18s;box-shadow:var(--shadow);
+  display:inline-flex;align-items:center;gap:8px;min-height:46px;}
+.calbtn:hover{background:var(--aegean);color:#fff;}
+.calbtn.active{background:var(--aegean);color:#fff;}
+
+/* ===== Boton de cambiar fecha en cada actividad ===== */
+.act-datebar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;
+  padding-top:9px;border-top:1px dashed var(--line);flex-wrap:wrap;}
+.act-datebtn{font-size:12.5px;font-weight:700;border:1.5px solid var(--line);background:#fff;color:var(--aegean-d);
+  padding:7px 12px;border-radius:20px;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px;
+  min-height:36px;}
+.act-datebtn:hover{border-color:var(--aegean);background:var(--aegean-l);}
+.act-moved{font-size:11.5px;color:var(--ink-soft);font-style:italic;}
+.simple-act{flex-wrap:wrap;}
+.simple-act .act-datebtn{margin-left:4px;}
+
+/* ===== Modal: selector de fecha ===== */
+.modal-overlay{position:fixed;inset:0;background:rgba(21,36,47,.55);display:flex;align-items:center;
+  justify-content:center;padding:16px;z-index:1000;}
+.modal-overlay[hidden]{display:none;}
+.modal-card{background:#fff;border-radius:18px;max-width:420px;width:100%;max-height:88vh;overflow-y:auto;
+  box-shadow:0 24px 60px -20px rgba(7,82,132,.6);}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:18px 20px 8px;}
+.modal-eyebrow{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--aegean-d);margin-bottom:2px;}
+.modal-head h3{font-size:17px;font-weight:800;color:var(--ink);line-height:1.3;}
+.modal-close{flex:none;width:32px;height:32px;border-radius:50%;border:none;background:var(--bone);
+  color:var(--ink-soft);font-size:16px;cursor:pointer;display:grid;place-items:center;transition:.15s;}
+.modal-close:hover{background:var(--line);color:var(--ink);}
+.modal-current-tag{font-size:12.5px;color:var(--ink-soft);padding:0 20px 10px;}
+.modal-cal{padding:4px 20px 4px;}
+.mcal-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.mcal-month-label{font-size:14.5px;font-weight:800;color:var(--ink);}
+.mcal-weekdays{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;margin:10px 0 6px;}
+.mcal-weekdays span{text-align:center;font-size:11px;font-weight:800;color:var(--ink-soft);}
+.mcal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;}
+.mcal-cell{aspect-ratio:1;border:none;border-radius:10px;background:var(--bone);font-size:13.5px;font-weight:700;
+  color:var(--ink);cursor:pointer;transition:.12s;display:grid;place-items:center;position:relative;padding:0;}
+.mcal-cell:hover:not(:disabled){background:var(--aegean-l);color:var(--aegean-d);}
+.mcal-cell.pad{visibility:hidden;pointer-events:none;}
+.mcal-cell:disabled{background:transparent;color:var(--line);cursor:not-allowed;}
+.mcal-cell.current{background:var(--aegean);color:#fff;}
+.mcal-cell.hasacts::after{content:"";position:absolute;bottom:4px;width:4px;height:4px;border-radius:50%;background:var(--gold);}
+.mcal-cell.current.hasacts::after{background:#fff;}
+.modal-hint{font-size:12.5px;color:var(--ink-soft);padding:10px 20px 18px;line-height:1.4;}
+
+/* ===== Vista Calendario completo ===== */
+.cal-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px;}
+.cal-nav{display:flex;align-items:center;gap:10px;}
+.cal-nav-btn{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);background:#fff;
+  font-size:18px;font-weight:800;cursor:pointer;display:grid;place-items:center;color:var(--ink);transition:.15s;}
+.cal-nav-btn:hover:not(:disabled){border-color:var(--aegean);color:var(--aegean-d);}
+.cal-nav-btn:disabled{opacity:.35;cursor:not-allowed;}
+.cal-month-label{font-size:19px;font-weight:800;color:var(--ink);min-width:150px;text-align:center;}
+.cal-reset{font-size:13px;font-weight:700;color:var(--int);background:#fff;border:1.5px solid var(--int);
+  padding:9px 15px;border-radius:20px;cursor:pointer;transition:.15s;min-height:40px;}
+.cal-reset:hover{background:var(--int);color:#fff;}
+.calview-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.calview-weekdays{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin-bottom:8px;}
+.calview-weekdays span{text-align:center;font-size:12px;font-weight:800;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;}
+.calview-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;}
+.calview-cell{min-height:108px;min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:#fff;padding:8px;
+  display:flex;flex-direction:column;gap:5px;text-align:left;}
+.calview-cell.pad{border:none;background:transparent;}
+.calview-cell.flight{background:var(--bone);}
+.calview-cell .cv-num{font-size:13px;font-weight:800;color:var(--ink-soft);}
+.calview-cell.hasday .cv-num{color:var(--ink);}
+.calview-cell .cv-flight-tag{font-size:11px;font-weight:700;color:var(--ink-soft);}
+.cv-chip{font-size:11.5px;font-weight:700;text-align:left;border:none;border-radius:8px;padding:4px 6px;
+  background:var(--aegean-l);color:var(--aegean-d);cursor:pointer;line-height:1.25;transition:.12s;
+  display:block;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.cv-chip:hover{background:var(--aegean);color:#fff;}
+.cv-more{font-size:11px;font-weight:700;color:var(--ink-soft);background:none;border:none;cursor:pointer;
+  text-align:left;padding:2px 6px;}
+.cv-daylink{margin-top:auto;font-size:10.5px;font-weight:700;color:var(--ink-soft);text-decoration:none;
+  border:none;background:none;cursor:pointer;text-align:left;padding:0 6px 2px;}
+.cv-daylink:hover{color:var(--aegean-d);}
+.cal-changes-note{font-size:13px;color:var(--ink-soft);background:var(--aegean-l);border:1px solid var(--line);
+  border-radius:10px;padding:9px 14px;margin-bottom:16px;display:flex;justify-content:space-between;
+  align-items:center;gap:12px;flex-wrap:wrap;}
+.cal-scroll-hint{display:none;font-size:12.5px;font-weight:700;color:var(--ink-soft);margin:-6px 0 10px;}
+@media(max-width:680px){
+  .calview-weekdays, .calview-grid{min-width:700px;}
+  .calview-cell{min-height:88px;padding:6px;gap:3px;}
+  .cv-chip{font-size:10.5px;padding:3px 5px;}
+  .cal-month-label{font-size:16px;min-width:120px;}
+  .cal-scroll-hint{display:block;}
+}
+
+@keyframes flashPulse{0%{box-shadow:0 0 0 0 rgba(217,164,65,.85);}70%{box-shadow:0 0 0 14px rgba(217,164,65,0);}100%{box-shadow:0 0 0 0 rgba(217,164,65,0);}}
+.flash-highlight{animation:flashPulse 1.4s ease-out 2;}
+
 /* ============================================================
    BLINDAJE ANTI-TEMA-OSCURO  (forzar modo claro siempre)
    ============================================================ */
 html, body, main, section, section.view,
-section.view.active, #view-itin, #view-map, #view-check,
+section.view.active, #view-itin, #view-map, #view-check, #view-cal,
 #itinerary, .days, .legday{
   background-color:#f6f9fb !important;
 }
@@ -219,9 +314,24 @@ section.view.active, #view-itin, #view-map, #view-check,
    el footer oscuro: si se fuerza aqui, su clase pisa el fondo oscuro
    (mayor especificidad que el selector de elemento "header"/"footer"). */
 .day, .day-top, .day-body, .day-foot, .filters, .checkcard,
-nav.tabs, nav.tabs .wrap, .maplink, .minibtn, .loccard, .loc-body{
+nav.tabs, nav.tabs .wrap, .maplink, .minibtn, .loccard, .loc-body,
+.calbtn, .act-datebtn, .modal-card, .cal-nav-btn, .cal-reset,
+.calview-cell, .mcal-cell{
   background-color:#ffffff !important;
 }
+.calstrip{background-color:#e6f1fa !important;}
+.calview-cell.flight, .mcal-cell{background-color:#f6f9fb !important;}
+.calbtn.active, .calbtn:hover{background-color:#0a6ebd !important;}
+.mcal-cell.current{background-color:#0a6ebd !important;}
+.cv-chip{background-color:#e6f1fa !important;color:#075284 !important;}
+.cv-chip:hover{background-color:#0a6ebd !important;color:#ffffff !important;}
+.modal-eyebrow, .cal-month-label, .mcal-month-label, .modal-head h3,
+.act-datebtn, .cv-num, .cv-daylink, .cv-flight-tag, .act-moved,
+.mcal-weekdays span, .calview-weekdays span{color:#15242f !important;}
+.cv-num, .cv-daylink, .cv-flight-tag, .act-moved,
+.mcal-weekdays span, .calview-weekdays span, .modal-current-tag, .modal-hint{color:#48606f !important;}
+.modal-eyebrow, .cal-month-label, .mcal-month-label, .act-datebtn, .calbtn{color:#075284 !important;}
+.calbtn.active, .calbtn:hover, .mcal-cell.current, .cv-chip:hover{color:#ffffff !important;}
 /* .chip cambia de fondo blanco a un color solido cuando esta seleccionado
    (.on): si se fuerza blanco aqui sin excluir .on, el boton seleccionado
    queda con texto blanco sobre fondo blanco e ilegible. Se fuerza cada
@@ -241,7 +351,7 @@ p.lead{color:#48606f !important;}
 .day-title, .checkcard h3,
 .ck .cklabel, .maplink, .day-date, .loc-name{color:#15242f !important;}
 .loc-desc, .ck .ckhint, .prog, .transport,
-.filtermeta .count, .maplegend, .simple-act{color:#48606f !important;}
+.filtermeta .count, .maplegend, .simple-act, .cal-scroll-hint{color:#48606f !important;}
 .legday h3{color:#075284 !important;}
 .tab{color:#48606f !important;}
 .tab.active{color:#ffffff !important;}
@@ -278,6 +388,10 @@ footer b{color:#ffffff !important;-webkit-text-fill-color:#ffffff;}
   <button class="tab" data-view="check">✅ Checklist</button>
   <a class="tab-link" href="menu-papa.html">🍽️ Menú</a>
 </div></nav>
+
+<div class="calstrip"><div class="wrap">
+  <button class="calbtn" id="calStripBtn" aria-controls="view-cal">📆 Ver calendario del viaje</button>
+</div></div>
 
 <main class="wrap">
   <section class="view active" id="view-itin">
@@ -348,7 +462,51 @@ footer b{color:#ffffff !important;-webkit-text-fill-color:#ffffff;}
       </div>
     </div>
   </section>
+
+  <section class="view" id="view-cal">
+    <h2 class="sec">Calendario del viaje</h2>
+    <p class="lead">Vista mensual de todo el plan. Toca una actividad para ir a su detalle en el Itinerario; toca el nombre del día para ir a la tarjeta completa. Los días grises son de vuelo, sin plan.</p>
+    <div class="cal-changes-note" id="calChangesNote" hidden>
+      <span id="calChangesText"></span>
+      <button class="cal-reset" id="calResetBtn">↺ Restablecer plan original</button>
+    </div>
+    <div class="cal-toolbar">
+      <div class="cal-nav">
+        <button class="cal-nav-btn" id="calPrevMonth" aria-label="Mes anterior">‹</button>
+        <span class="cal-month-label" id="calMonthLabel"></span>
+        <button class="cal-nav-btn" id="calNextMonth" aria-label="Mes siguiente">›</button>
+      </div>
+    </div>
+    <p class="cal-scroll-hint">↔ Desliza el calendario hacia los lados para ver toda la semana.</p>
+    <div class="calview-scroll">
+      <div class="calview-weekdays"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+      <div class="calview-grid" id="calGrid"></div>
+    </div>
+  </section>
 </main>
+
+<div class="modal-overlay" id="dateModal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="dateModalTitle">
+    <div class="modal-head">
+      <div>
+        <div class="modal-eyebrow">Cambiar fecha</div>
+        <h3 id="dateModalTitle"></h3>
+      </div>
+      <button class="modal-close" id="dateModalClose" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="modal-current-tag" id="dateModalCurrent"></div>
+    <div class="modal-cal">
+      <div class="mcal-nav">
+        <button class="cal-nav-btn" id="mcalPrev" aria-label="Mes anterior">‹</button>
+        <span class="mcal-month-label" id="mcalMonthLabel"></span>
+        <button class="cal-nav-btn" id="mcalNext" aria-label="Mes siguiente">›</button>
+      </div>
+      <div class="mcal-weekdays"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+      <div class="mcal-grid" id="mcalGrid"></div>
+    </div>
+    <p class="modal-hint">Los dias en gris no tienen plan (vuelos) y no se pueden elegir. El punto dorado indica que ese dia ya tiene otras actividades.</p>
+  </div>
+</div>
 
 <footer><div class="wrap">
   <div><b>Plan de viaje · Chicagoland para Papá</b> — base en Mundelein, IL.</div>
@@ -490,7 +648,7 @@ function ta(q){return "https://www.tripadvisor.com/Search?q="+encodeURIComponent
 /* cada act con link (web oficial o Google Maps). pin:true => va al mapa. imgs:"clave" => carrusel real (ver IMG). */
 const DAYS=[
 /* ===== TRAMO 1 · 17-25 jul (26 = vuelo de Papa, sin plan) ===== */
-{leg:1,date:"Vie 17 jul · llega PM",title:"Llegada suave",
+{leg:1,date:"Vie 17 jul · llega PM",iso:"2026-07-17",title:"Llegada suave",
  level:"relax",levelTxt:"Relajado",walk:"Poca caminata",zone:"lake",zoneTxt:"Lake County",
  transit:"auto",transitTxt:"Auto",cats:["aire","gastro"],
  transport:"Recogida y asentarse en Mundelein. <b>Auto</b>, todo a &le;15 min de casa.",
@@ -500,7 +658,7 @@ const DAYS=[
  ],
  meals:[{l:"Cena 🌙",t:"Algo ligero, sin trasladarse lejos el primer dia tras el viaje.",ref:"Downtown Libertyville",link:gm("Downtown Libertyville IL restaurants")}]},
 
-{leg:1,date:"Sab 18 jul",title:"En casa: cumpleaños de Lore (lomo al trapo)",
+{leg:1,date:"Sab 18 jul",iso:"2026-07-18",title:"En casa: cumpleaños de Lore (lomo al trapo)",
  level:"relax",levelTxt:"Relajado",walk:"Sin caminata",zone:"lake",zoneTxt:"Lake County",
  transit:"auto",transitTxt:"Auto",cats:["gastro"],
  transport:"Dia en casa en Mundelein, sin desplazamientos. Plan mandatorio: se queda toda la familia.",
@@ -509,7 +667,7 @@ const DAYS=[
  ],
  meals:[{l:"Cena especial 🌙🎂",t:"Lomo al trapo en casa por el cumpleanos de Lore.",ref:"En casa · Mundelein",link:gm(HOME.addr)}]},
 
-{leg:1,date:"Dom 19 jul",title:"Jardines y orillas del lago",
+{leg:1,date:"Dom 19 jul",iso:"2026-07-19",title:"Jardines y orillas del lago",
  level:"mod",levelTxt:"Moderado",walk:"Caminata media (pavimentado)",zone:"cook",zoneTxt:"Cook County",
  transit:"auto",transitTxt:"Auto",cats:["aire","cultura"],
  transport:"<b>Auto</b> a Glencoe, ~35-40 min. Parqueo del jardin tarifa fija (<span class='verify'>verificar</span> ~$10).",
@@ -521,7 +679,7 @@ const DAYS=[
    {l:"Almuerzo",t:"Cafe del jardin o picnic al aire libre.",ref:"Cafe Chicago Botanic Garden",link:gm("Garden Cafe Chicago Botanic Garden")},
    {l:"Cena 🌙",t:"Terraza con jardin de luces.",ref:"Mockingbird Garden & Bar (East Dundee)",link:gm("Mockingbird Garden Bar 217 Barrington Ave East Dundee IL")}]},
 
-{leg:1,date:"Lun 20 jul",title:"Lunes tranquilo en Lake County",
+{leg:1,date:"Lun 20 jul",iso:"2026-07-20",title:"Lunes tranquilo en Lake County",
  level:"relax",levelTxt:"Relajado",walk:"Caminata corta",zone:"lake",zoneTxt:"Lake County",
  transit:"auto",transitTxt:"Auto",cats:["aire"],
  transport:"<b>Auto</b>, ~10-15 min. Recuperar la pierna cerca de casa.",
@@ -533,7 +691,7 @@ const DAYS=[
    {l:"Almuerzo",t:"Picnic junto al lago o cafe en Lake Forest.",ref:"Market Square Lake Forest",link:gm("Market Square Lake Forest IL restaurants")},
    {l:"Cena 🌙",t:"Cerca de casa, sin desplazamiento largo tras un dia relajado.",ref:"Shakou (Barrington, rooftop)",link:gm("Shakou 121 W Main St Barrington IL")}]},
 
-{leg:1,date:"Mar 21 jul",title:"Dia sereno + sabores griegos al atardecer",
+{leg:1,date:"Mar 21 jul",iso:"2026-07-21",title:"Dia sereno + sabores griegos al atardecer",
  level:"relax",levelTxt:"Relajado",walk:"Caminata corta",zone:"cook",zoneTxt:"Cook County",
  transit:"auto",transitTxt:"Auto",cats:["aire","compras","griego"],
  transport:"<b>Auto</b>. Manana tranquila cerca de casa; a media manana, mandado de supermercado (Costco/Target/Garden Fresh); al final de la tarde, mercado griego en Des Plaines.",
@@ -546,7 +704,7 @@ const DAYS=[
    {l:"Almuerzo",t:"Brunch relajado cerca de casa.",ref:"Downtown Libertyville",link:gm("Libertyville IL brunch")},
    {l:"Cena 🌙",t:"Cocinar en casa con lo comprado en el mercado - noche griega casera.",ref:"En casa",link:gm("Columbus Food Market Des Plaines IL")}]},
 
-{leg:1,date:"Mie 22 jul",title:"Navy Pier: FlyOver y deep dish",
+{leg:1,date:"Mie 22 jul",iso:"2026-07-22",title:"Navy Pier: FlyOver y deep dish",
  level:"int",levelTxt:"Intenso",walk:"Mucha caminata",zone:"downtown",zoneTxt:"Downtown",
  transit:"metra",transitTxt:"Metra",cats:["cultura","aire","gastro"],
  transport:"<b>Metra MD-N</b> a Union Station; al Pier en CTA bus 124 o taxi corto. Evita parqueo caro y trafico (<span class='verify'>verificar</span> horarios).",
@@ -559,7 +717,7 @@ const DAYS=[
    {l:"Almuerzo ★",t:"Pizza deep dish de Chicago - sabor 100% local.",ref:"Giordano's Navy Pier",link:"https://giordanos.com/locations/navy-pier/"},
    {l:"Cena 🌙",t:"Ligera de regreso.",ref:"The Quarry Cable Park (Crystal Lake, lakefront)",link:gm("The Quarry Cable Park 5517 Northwest Hwy Crystal Lake IL")}]},
 
-{leg:1,date:"Jue 23 jul",title:"Naturaleza junto al lago Michigan",
+{leg:1,date:"Jue 23 jul",iso:"2026-07-23",title:"Naturaleza junto al lago Michigan",
  level:"mod",levelTxt:"Moderado",walk:"Caminata media en arena/sendero",zone:"lake",zoneTxt:"Lake County",
  transit:"auto",transitTxt:"Auto",cats:["aire"],
  transport:"<b>Auto</b> a Zion, ~35-40 min. Playa amplia y plana.",
@@ -571,7 +729,7 @@ const DAYS=[
    {l:"Almuerzo",t:"Picnic frente al lago.",ref:"Illinois Beach State Park",link:gm("Illinois Beach State Park Zion IL")},
    {l:"Cena 🌙",t:"BBQ americano con voleibol y fogatas.",ref:"Hawthornes Backyard (West Chicago)",link:gm("Hawthornes Backyard 1200 W Hawthorne Ln West Chicago IL")}]},
 
-{leg:1,date:"Vie 24 jul",title:"Arte y arquitectura del rio",
+{leg:1,date:"Vie 24 jul",iso:"2026-07-24",title:"Arte y arquitectura del rio",
  level:"int",levelTxt:"Intenso",walk:"Mucha caminata",zone:"downtown",zoneTxt:"Downtown",
  transit:"metra",transitTxt:"Metra",cats:["cultura","gastro"],
  transport:"<b>Metra MD-N</b> a Union Station; museo y crucero a poca distancia a pie en el Loop.",
@@ -584,7 +742,7 @@ const DAYS=[
    {l:"Almuerzo",t:"Cafe del Art Institute o terraza en el Loop.",ref:"Art Institute cafe",link:gm("Art Institute of Chicago restaurant")},
    {l:"Cena 🌙",t:"Terraza junto al rio antes del Metra.",ref:"Riverwalk (terrazas)",link:gm("Chicago Riverwalk restaurants")}]},
 
-{leg:1,date:"Sab 25 jul",title:"★ GREEKTOWN: almuerzo en Athena",
+{leg:1,date:"Sab 25 jul",iso:"2026-07-25",title:"★ GREEKTOWN: almuerzo en Athena",
  level:"mod",levelTxt:"Moderado",walk:"Caminata media",zone:"downtown",zoneTxt:"Downtown",
  transit:"metra",transitTxt:"Metra",cats:["gastro","griego","cultura"],fixed:true,
  transport:"<b>Metra MD-N</b> (Milwaukee District North) desde la estacion <b>Libertyville</b> a Union Station; Greektown a ~10-12 min a pie u Uber corto (<span class='verify'>verificar</span> horario sabado). Athena ofrece valet si prefieren <b>auto</b> (~70 min).",
@@ -600,7 +758,7 @@ const DAYS=[
 /* Dom 26 jul = vuelo de Papa - sin actividades planificadas */
 
 /* ===== TRAMO 2 · 31 jul - 7 ago (8 = vuelo de regreso a Colombia) ===== */
-{leg:2,date:"Vie 31 jul · regreso",title:"Reinicio relajado",
+{leg:2,date:"Vie 31 jul · regreso",iso:"2026-07-31",title:"Reinicio relajado",
  level:"relax",levelTxt:"Relajado",walk:"Poca caminata",zone:"lake",zoneTxt:"Lake County",
  transit:"auto",transitTxt:"Auto",cats:["aire","gastro"],
  transport:"<b>Auto</b>. Reincorporacion suave a Mundelein.",
@@ -610,7 +768,7 @@ const DAYS=[
  ],
  meals:[{l:"Cena 🌙",t:"Algo ligero el dia de regreso.",ref:"Shakou (Barrington, rooftop)",link:gm("Shakou 121 W Main St Barrington IL")}]},
 
-{leg:2,date:"Sab 1 ago",title:"Cook County: parques y mediterraneo",
+{leg:2,date:"Sab 1 ago",iso:"2026-08-01",title:"Cook County: parques y mediterraneo",
  level:"mod",levelTxt:"Moderado",walk:"Caminata media",zone:"cook",zoneTxt:"Cook County",
  transit:"auto",transitTxt:"Auto",cats:["aire","gastro","cultura"],
  transport:"<b>Auto</b> a Skokie/Evanston, ~35-45 min.",
@@ -622,7 +780,7 @@ const DAYS=[
    {l:"Almuerzo",t:"Mediterraneo con terraza en Evanston.",ref:"Downtown Evanston",link:gm("Mediterranean restaurant Evanston IL")},
    {l:"Cena 🌙",t:"Italiano con rooftop y luces.",ref:"Sogno (Wheaton, rooftop)",link:gm("Sogno 100 N Hale St Wheaton IL")}]},
 
-{leg:2,date:"Dom 2 ago",title:"Downtown a fondo: museos del lago",
+{leg:2,date:"Dom 2 ago",iso:"2026-08-02",title:"Downtown a fondo: museos del lago",
  level:"int",levelTxt:"Intenso",walk:"Mucha caminata",zone:"downtown",zoneTxt:"Downtown",
  transit:"metra",transitTxt:"Metra",cats:["cultura","aire"],
  transport:"<b>Metra MD-N</b> a Union Station; al Museum Campus en taxi corto o CTA. Evita parqueo del campus.",
@@ -635,7 +793,7 @@ const DAYS=[
    {l:"Almuerzo",t:"Cafeteria del museo o food hall del Loop.",ref:"Field Museum cafe",link:gm("Field Museum cafe Chicago")},
    {l:"Cena 🌙",t:"Patio con bar exterior y musica.",ref:"The James (Geneva, new american)",link:gm("The James 317 S 3rd St Geneva IL")}]},
 
-{leg:2,date:"Lun 3 ago",title:"Lunes sereno en el bosque",
+{leg:2,date:"Lun 3 ago",iso:"2026-08-03",title:"Lunes sereno en el bosque",
  level:"relax",levelTxt:"Relajado",walk:"Caminata corta",zone:"lake",zoneTxt:"Lake County",
  transit:"auto",transitTxt:"Auto",cats:["aire"],
  transport:"<b>Auto</b>, ~15-25 min. Recuperar tras el dia intenso.",
@@ -647,7 +805,7 @@ const DAYS=[
    {l:"Almuerzo",t:"Cafe con terraza en Long Grove.",ref:"Downtown Long Grove",link:gm("Long Grove IL restaurants")},
    {l:"Cena 🌙",t:"Cerca de casa, sin desplazamiento largo tras un dia relajado.",ref:"Shakou (Barrington, rooftop)",link:gm("Shakou 121 W Main St Barrington IL")}]},
 
-{leg:2,date:"Mar 4 ago",title:"Lake Geneva (Wisconsin): crucero por el lago y almuerzo",
+{leg:2,date:"Mar 4 ago",iso:"2026-08-04",title:"Lake Geneva (Wisconsin): crucero por el lago y almuerzo",
  level:"mod",levelTxt:"Moderado",walk:"Poca caminata",zone:"lake",zoneTxt:"Lake County",
  transit:"auto",transitTxt:"Auto",cats:["aire","gastro"],
  transport:"<b>Auto</b> a Lake Geneva, WI, ~55-60 min desde Mundelein.",
@@ -659,7 +817,7 @@ const DAYS=[
    {l:"Almuerzo",t:"Frente al lago en el centro de Lake Geneva.",ref:"Restaurante junto al muelle (Lake Geneva, WI)",link:gm("restaurants lakefront Lake Geneva WI")},
    {l:"Cena 🌙",t:"Cerca de casa, rooftop sushi.",ref:"Shakou (Barrington)",link:gm("Shakou 121 W Main St Barrington IL")}]},
 
-{leg:2,date:"Mie 5 ago",title:"★ Skydeck del Willis Tower + el Bean",
+{leg:2,date:"Mie 5 ago",iso:"2026-08-05",title:"★ Skydeck del Willis Tower + el Bean",
  level:"mod",levelTxt:"Moderado",walk:"Caminata media",zone:"downtown",zoneTxt:"Downtown",
  transit:"metra",transitTxt:"Metra",cats:["aire","cultura","gastro"],
  transport:"<b>Metra MD-N</b> a Union Station; Willis Tower a ~10 min a pie. Luego Millennium Park y el Riverwalk, todo a corta distancia en el Loop. Ritmo pausado con una parada en las alturas.",
@@ -672,7 +830,7 @@ const DAYS=[
    {l:"Almuerzo",t:"Terraza junto al rio en el Loop.",ref:"Riverwalk",link:gm("Chicago Riverwalk restaurants")},
    {l:"Cena 🌙",t:"Ultima gran cena de patio.",ref:"The James (Geneva) o Sogno (Wheaton)",link:gm("The James 317 S 3rd St Geneva IL")}]},
 
-{leg:2,date:"Jue 6 ago",title:"Tarde tranquila junto al lago",
+{leg:2,date:"Jue 6 ago",iso:"2026-08-06",title:"Tarde tranquila junto al lago",
  level:"relax",levelTxt:"Relajado",walk:"Caminata corta",zone:"lake",zoneTxt:"Lake County",
  transit:"auto",transitTxt:"Auto",cats:["aire","gastro"],
  transport:"<b>Auto</b>, cerca de casa. Dia tranquilo, sin trasladarse lejos.",
@@ -684,7 +842,7 @@ const DAYS=[
    {l:"Almuerzo",t:"Brunch mediterraneo favorito.",ref:"Libertyville / Vernon Hills",link:gm("brunch Libertyville IL")},
    {l:"Cena 🌙",t:"Ligera, cerca de casa.",ref:"Shakou (Barrington, rooftop)",link:gm("Shakou 121 W Main St Barrington IL")}]},
 
-{leg:2,date:"Vie 7 ago · Papá con nosotros",title:"Último día con Papá: cierre en familia",
+{leg:2,date:"Vie 7 ago · Papá con nosotros",iso:"2026-08-07",title:"Último día con Papá: cierre en familia",
  level:"relax",levelTxt:"Relajado",walk:"Caminata corta",zone:"lake",zoneTxt:"Lake County",
  transit:"auto",transitTxt:"Auto",cats:["compras","gastro","aire"],
  transport:"<b>Auto</b>, todo cerca de casa. Ultimo dia completo antes del vuelo de regreso a Colombia (sabado).",
@@ -710,16 +868,109 @@ const filters={level:new Set(),cat:new Set(),zone:new Set(),transit:new Set()};
 const prepDone=[];
 const visitDone=DAYS.map(()=>false);
 
+/* ===== FECHAS: estado editable (STATE) + overrides persistidos ===== */
+const VALID_ISO=new Set(DAYS.map(d=>d.iso));
+const MIN_ISO=DAYS[0].iso, MAX_ISO=DAYS[DAYS.length-1].iso;
+const DAY_BY_ISO={}; DAYS.forEach(d=>{ DAY_BY_ISO[d.iso]=d; });
+const MONTH_NAMES_ES=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+function shortDateLabel(iso){ const d=DAY_BY_ISO[iso]; return d?d.date.split('·')[0].trim():iso; }
+function pad2(n){ return n<10?'0'+n:''+n; }
+function isoOf(y,m,day){ return y+'-'+pad2(m+1)+'-'+pad2(day); }
+function monthMatrix(year,month){
+  const first=new Date(year,month,1);
+  const startWeekday=(first.getDay()+6)%7; // 0=lunes
+  const daysInMonth=new Date(year,month+1,0).getDate();
+  const cells=[];
+  for(let i=0;i<startWeekday;i++) cells.push(null);
+  for(let day=1;day<=daysInMonth;day++) cells.push(day);
+  while(cells.length%7!==0) cells.push(null);
+  return cells;
+}
+function findActivityInState(actId){
+  for(const d of STATE){
+    const act=d.acts.find(a=>a.id===actId);
+    if(act) return {day:d,act:act};
+  }
+  return null;
+}
+const OVERRIDES_KEY='itinChicagoPapa.dateOverrides.v1';
+function loadOverrides(){
+  try{ const raw=JSON.parse(localStorage.getItem(OVERRIDES_KEY)); return (raw&&typeof raw==='object')?raw:{}; }
+  catch(e){ return {}; }
+}
+function saveOverrides(){ try{ localStorage.setItem(OVERRIDES_KEY,JSON.stringify(overrides)); }catch(e){} }
+let overrides=loadOverrides();
+let STATE=[];
+function applyOverrides(){
+  STATE=DAYS.map(d=>Object.assign({},d,{acts:[]}));
+  const byIso={}; STATE.forEach(d=>{ byIso[d.iso]=d; });
+  let pruned=false;
+  const cleanOverrides={};
+  DAYS.forEach(d=>{
+    d.acts.forEach((a,i)=>{
+      const id=d.iso+'#'+i;
+      let targetIso=overrides[id];
+      if(targetIso && !byIso[targetIso]) targetIso=undefined; // fecha invalida guardada -> ignorar
+      if(targetIso && targetIso!==d.iso) cleanOverrides[id]=targetIso;
+      const homeDay=(targetIso&&byIso[targetIso])?byIso[targetIso]:byIso[d.iso];
+      homeDay.acts.push(Object.assign({},a,{id:id,_homeIso:d.iso}));
+    });
+  });
+  if(JSON.stringify(cleanOverrides)!==JSON.stringify(overrides)){ overrides=cleanOverrides; pruned=true; }
+  if(pruned) saveOverrides();
+}
+applyOverrides();
+function moveActivity(actId,newIso){
+  if(!VALID_ISO.has(newIso)) return;
+  const homeIso=actId.split('#')[0];
+  if(newIso===homeIso) delete overrides[actId];
+  else overrides[actId]=newIso;
+  saveOverrides();
+  applyOverrides();
+  renderItinerary();
+  if(mapBuilt) rebuildMapPins();
+  renderCalendarView();
+  updateCalChangesNote();
+}
+function resetOverrides(){
+  overrides={};
+  saveOverrides();
+  applyOverrides();
+  renderItinerary();
+  if(mapBuilt) rebuildMapPins();
+  renderCalendarView();
+  updateCalChangesNote();
+}
+function updateCalChangesNote(){
+  const n=Object.keys(overrides).length;
+  const note=document.getElementById('calChangesNote');
+  if(!note) return;
+  if(n>0){
+    note.hidden=false;
+    document.getElementById('calChangesText').textContent=n===1?'Hay 1 actividad movida de su fecha original.':('Hay '+n+' actividades movidas de su fecha original.');
+  } else { note.hidden=true; }
+}
+
 /* ===== TABS ===== */
+function activateView(viewKey){
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+  document.getElementById('calStripBtn').classList.remove('active');
+  const tabBtn=document.querySelector('.tab[data-view="'+viewKey+'"]');
+  if(tabBtn) tabBtn.classList.add('active'); else document.getElementById('calStripBtn').classList.add('active');
+  document.getElementById('view-'+viewKey).classList.add('active');
+  if(viewKey==='map'){ ensureMap(); if(map) setTimeout(()=>map.invalidateSize(),80); }
+  if(viewKey==='cal'){ renderCalendarView(); }
+}
 document.querySelectorAll('.tab').forEach(t=>{
   t.addEventListener('click',()=>{
-    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
-    document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
-    t.classList.add('active');
-    document.getElementById('view-'+t.dataset.view).classList.add('active');
+    activateView(t.dataset.view);
     window.scrollTo({top:0,left:0,behavior:'instant'});
-    if(t.dataset.view==='map'){ ensureMap(); if(map) setTimeout(()=>map.invalidateSize(),80); }
   });
+});
+document.getElementById('calStripBtn').addEventListener('click',()=>{
+  activateView('cal');
+  window.scrollTo({top:0,left:0,behavior:'instant'});
 });
 
 /* ===== CARRUSEL DE IMAGENES ===== */
@@ -746,6 +997,8 @@ function setCarouselIndex(carousel,idx){
 }
 const itinEl=document.getElementById('itinerary');
 itinEl.addEventListener('click',e=>{
+  const dateBtn=e.target.closest('.act-datebtn');
+  if(dateBtn){ openDateModal(dateBtn.dataset.actId); return; }
   const arrow=e.target.closest('.car-arrow');
   if(arrow){
     const carousel=arrow.closest('.carousel');
@@ -776,11 +1029,14 @@ function dayMatches(d){
   if(filters.cat.size){ let ok=false; filters.cat.forEach(c=>{ if(d.cats.includes(c)) ok=true; }); if(!ok) return false; }
   return true;
 }
-function actCardHTML(a,zoneColor,zoneIcon){
+function actCardHTML(a,zoneColor,zoneIcon,dayIso){
   const learn=a.link?'<a class="learn" target="_blank" rel="noopener" href="'+a.link+'">Conocer mas ↗</a>':'';
+  const movedNote=(a._homeIso&&a._homeIso!==dayIso)?'<span class="act-moved">Movido desde '+shortDateLabel(a._homeIso)+'</span>':'<span></span>';
+  const nameAttr=a.n.replace(/"/g,'&quot;');
+  const dateBtn='<button class="act-datebtn" data-act-id="'+a.id+'" aria-label="Cambiar fecha de '+nameAttr+'">📅 Cambiar fecha</button>';
   if(!a.pin && !a.imgs){
-    return '<div class="simple-act"><span class="dot"></span><span>'+
-      '<b>'+a.n+'</b> — '+a.d+' '+learn+'</span></div>';
+    return '<div class="simple-act" data-act-id="'+a.id+'"><span class="dot"></span><span>'+
+      '<b>'+a.n+'</b> — '+a.d+' '+learn+'</span>'+movedNote+dateBtn+'</div>';
   }
   let reviewsHtml='';
   if(a.pin && a.gmap){
@@ -790,14 +1046,16 @@ function actCardHTML(a,zoneColor,zoneIcon){
       '<a class="review-link" target="_blank" rel="noopener" href="'+gm(a.gmap)+'">Resenas en Google Maps ↗</a>'+
       '<a class="review-link" target="_blank" rel="noopener" href="'+ta(a.gmap)+'">Buscar en TripAdvisor ↗</a></div>';
   }
-  return '<article class="loccard">'+carouselHTML(a,zoneColor,zoneIcon)+
+  return '<article class="loccard" data-act-id="'+a.id+'">'+carouselHTML(a,zoneColor,zoneIcon)+
     '<div class="loc-body"><div class="loc-name">'+a.n+(a.fixedFlag?' <span class="fixed-flag">★ FIJO</span>':'')+'</div>'+
-    '<p class="loc-desc">'+a.d+'</p>'+learn+reviewsHtml+'</div></article>';
+    '<p class="loc-desc">'+a.d+'</p>'+learn+reviewsHtml+
+    '<div class="act-datebar">'+movedNote+dateBtn+'</div>'+
+    '</div></article>';
 }
 function renderItinerary(){
   const cont=document.getElementById('itinerary'); cont.innerHTML='';
   let shown=0,currentLeg=0;
-  DAYS.forEach(d=>{
+  STATE.forEach(d=>{
     if(!dayMatches(d)) return; shown++;
     if(d.leg!==currentLeg){
       currentLeg=d.leg;
@@ -807,9 +1065,9 @@ function renderItinerary(){
       const grid=document.createElement('div'); grid.className='days'; grid.dataset.leg=d.leg; cont.appendChild(grid);
     }
     const grid=cont.querySelector('.days[data-leg="'+d.leg+'"]');
-    const card=document.createElement('article'); card.className='day'+(d.fixed?' fixed':'');
+    const card=document.createElement('article'); card.className='day'+(d.fixed?' fixed':''); card.dataset.dayIso=d.iso;
     const zoneColor=ZONE_COLOR[d.zone]||'#0a6ebd', zoneIcon=ZONE_ICON[d.zone]||'📍';
-    const locsHtml=d.acts.map(a=>actCardHTML(a,zoneColor,zoneIcon)).join('');
+    const locsHtml=d.acts.map(a=>actCardHTML(a,zoneColor,zoneIcon,d.iso)).join('');
     const mealsHtml=d.meals.map(m=>{
       const r=m.ref?' <span class="mtxt">·&nbsp;<a target="_blank" rel="noopener" href="'+(m.link||'#')+'">'+m.ref+'</a></span>':'';
       return '<div class="ml"><span class="mlabel">'+m.l+'</span><span class="mtxt">'+m.t+r+'</span></div>';
@@ -824,7 +1082,7 @@ function renderItinerary(){
           '<span class="badge transit">'+(d.transit==='metra'?'🚆':'🚗')+' '+d.transitTxt+'</span>'+
         '</div></div>'+
       '<div class="day-body"><div class="transport">'+d.transport+'</div>'+
-        '<div class="locs">'+locsHtml+'</div>'+
+        '<div class="locs">'+(locsHtml||'<p class="loc-desc">Sin actividades asignadas a este dia.</p>')+'</div>'+
         '<div class="meals">'+mealsHtml+'</div></div>'+
       '<div class="day-foot"><div class="day-links">'+
         (d.acts.find(a=>a.pin)?'<a class="minibtn" target="_blank" rel="noopener" href="'+gdir(d.acts.find(a=>a.pin).gmap)+'">🚗 Direcciones desde casa</a>':'')+
@@ -852,10 +1110,10 @@ document.getElementById('clearfilters').addEventListener('click',()=>{
 });
 
 /* ===== MAPA ===== */
-let map=null, mapBuilt=false;
+let map=null, mapBuilt=false, pinMarkers=[];
 function getPins(){
   const seen={}, pins=[];
-  DAYS.forEach(d=>d.acts.forEach(a=>{
+  STATE.forEach(d=>d.acts.forEach(a=>{
     if(a.pin && a.lat){
       const key=a.lat.toFixed(3)+','+a.lng.toFixed(3);
       if(seen[key]) return; seen[key]=1;
@@ -874,19 +1132,30 @@ function initMap(){
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap'}).addTo(map);
     const homeIcon=L.divIcon({className:'',html:'<div style="width:28px;height:28px;background:#d9a441;border:3px solid #fff;border-radius:50%;box-shadow:0 2px 7px rgba(0,0,0,.45);display:grid;place-items:center;font-size:15px;">🏠</div>',iconSize:[28,28],iconAnchor:[14,14]});
     L.marker([HOME.lat,HOME.lng],{icon:homeIcon}).addTo(map).bindPopup('<b>'+HOME.name+'</b><br>'+HOME.addr);
-    const group=[[HOME.lat,HOME.lng]];
-    getPins().forEach(p=>{
-      const col=ZONE_COLOR[p.zone]||'#0a6ebd';
-      const ic=L.divIcon({className:'',html:'<div style="width:19px;height:19px;background:'+col+';border:2.5px solid #fff;border-radius:50%;box-shadow:0 1px 5px rgba(0,0,0,.5);"></div>',iconSize:[19,19],iconAnchor:[9,9]});
-      const thumb=p.imgs&&IMG[p.imgs]&&IMG[p.imgs][0]?'<img src="'+IMG[p.imgs][0].u+'" alt="">':'';
-      L.marker([p.lat,p.lng],{icon:ic}).addTo(map).bindPopup(
-        '<b>'+p.n+'</b><br><span style="color:#48606f;">'+p.day.split('·')[0]+' · '+p.dayTitle+'</span>'+thumb+
-        '<br><a class="pop-link" target="_blank" rel="noopener" href="'+(p.link||gm(p.gmap))+'">Conocer mas ↗</a>');
-      group.push([p.lat,p.lng]);
-    });
-    map.fitBounds(group,{padding:[40,40]});
-    setTimeout(()=>map.invalidateSize(),120);
+    addPinMarkers();
   }catch(e){ mapFallback(); }
+}
+function addPinMarkers(){
+  if(!map) return;
+  pinMarkers.forEach(m=>map.removeLayer(m));
+  pinMarkers=[];
+  const group=[[HOME.lat,HOME.lng]];
+  getPins().forEach(p=>{
+    const col=ZONE_COLOR[p.zone]||'#0a6ebd';
+    const ic=L.divIcon({className:'',html:'<div style="width:19px;height:19px;background:'+col+';border:2.5px solid #fff;border-radius:50%;box-shadow:0 1px 5px rgba(0,0,0,.5);"></div>',iconSize:[19,19],iconAnchor:[9,9]});
+    const thumb=p.imgs&&IMG[p.imgs]&&IMG[p.imgs][0]?'<img src="'+IMG[p.imgs][0].u+'" alt="">':'';
+    const marker=L.marker([p.lat,p.lng],{icon:ic}).addTo(map).bindPopup(
+      '<b>'+p.n+'</b><br><span style="color:#48606f;">'+p.day.split('·')[0]+' · '+p.dayTitle+'</span>'+thumb+
+      '<br><a class="pop-link" target="_blank" rel="noopener" href="'+(p.link||gm(p.gmap))+'">Conocer mas ↗</a>');
+    pinMarkers.push(marker);
+    group.push([p.lat,p.lng]);
+  });
+  map.fitBounds(group,{padding:[40,40]});
+  setTimeout(()=>map.invalidateSize(),120);
+}
+function rebuildMapPins(){
+  buildMapList();
+  addPinMarkers();
 }
 function mapFallback(){
   document.getElementById('map').innerHTML='<div style="height:100%;display:grid;place-items:center;text-align:center;padding:24px;color:#48606f;"><div><b>El mapa interactivo no cargo.</b><br>Usa la lista de abajo para abrir cada destino.</div></div>';
@@ -899,6 +1168,137 @@ function buildMapList(){
   });
   document.getElementById('maplist').innerHTML=html;
 }
+
+/* ===== MODAL: cambiar fecha de una actividad ===== */
+let mcalActId=null, mcalYear=parseInt(MIN_ISO.slice(0,4),10), mcalMonth=parseInt(MIN_ISO.slice(5,7),10)-1;
+let dateModalLastFocus=null;
+function stateHasActs(iso){ const d=STATE.find(x=>x.iso===iso); return !!(d&&d.acts.length>0); }
+function openDateModal(actId){
+  const found=findActivityInState(actId);
+  if(!found) return;
+  mcalActId=actId;
+  mcalYear=parseInt(found.day.iso.slice(0,4),10);
+  mcalMonth=parseInt(found.day.iso.slice(5,7),10)-1;
+  document.getElementById('dateModalTitle').textContent=found.act.n;
+  document.getElementById('dateModalCurrent').textContent='Actualmente: '+shortDateLabel(found.day.iso);
+  renderMcal();
+  dateModalLastFocus=document.activeElement;
+  const modal=document.getElementById('dateModal');
+  modal.hidden=false;
+  document.addEventListener('keydown',onDateModalKeydown);
+  const firstEnabled=document.querySelector('#mcalGrid button:not(:disabled)');
+  if(firstEnabled) firstEnabled.focus();
+}
+function closeDateModal(){
+  document.getElementById('dateModal').hidden=true;
+  document.removeEventListener('keydown',onDateModalKeydown);
+  mcalActId=null;
+  if(dateModalLastFocus && typeof dateModalLastFocus.focus==='function') dateModalLastFocus.focus();
+}
+function onDateModalKeydown(e){
+  if(e.key==='Escape'){ closeDateModal(); return; }
+  if(e.key==='Tab'){
+    const focusables=[...document.querySelectorAll('#dateModal button:not(:disabled)')];
+    if(!focusables.length) return;
+    const first=focusables[0], last=focusables[focusables.length-1];
+    if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+  }
+}
+function renderMcal(){
+  document.getElementById('mcalMonthLabel').textContent=MONTH_NAMES_ES[mcalMonth]+' '+mcalYear;
+  const minY=parseInt(MIN_ISO.slice(0,4),10), minM=parseInt(MIN_ISO.slice(5,7),10)-1;
+  const maxY=parseInt(MAX_ISO.slice(0,4),10), maxM=parseInt(MAX_ISO.slice(5,7),10)-1;
+  document.getElementById('mcalPrev').disabled=(mcalYear<minY)||(mcalYear===minY&&mcalMonth<=minM);
+  document.getElementById('mcalNext').disabled=(mcalYear>maxY)||(mcalYear===maxY&&mcalMonth>=maxM);
+  const found=findActivityInState(mcalActId);
+  const currentIso=found?found.day.iso:null;
+  const grid=document.getElementById('mcalGrid'); grid.innerHTML='';
+  monthMatrix(mcalYear,mcalMonth).forEach(day=>{
+    const btn=document.createElement('button');
+    if(day===null){ btn.className='mcal-cell pad'; btn.disabled=true; btn.tabIndex=-1; grid.appendChild(btn); return; }
+    const iso=isoOf(mcalYear,mcalMonth,day);
+    const valid=VALID_ISO.has(iso);
+    btn.type='button';
+    btn.className='mcal-cell'+(iso===currentIso?' current':'')+((valid&&stateHasActs(iso))?' hasacts':'');
+    btn.textContent=day;
+    btn.disabled=!valid;
+    btn.setAttribute('aria-label',day+' de '+MONTH_NAMES_ES[mcalMonth]+(valid?'':' · sin plan (vuelo)')+(iso===currentIso?' · fecha actual':''));
+    if(!valid){ btn.title='Sin plan (vuelo)'; }
+    else{ btn.addEventListener('click',()=>{ const id=mcalActId; moveActivity(id,iso); closeDateModal(); flashActivity(id); }); }
+    grid.appendChild(btn);
+  });
+}
+document.getElementById('dateModalClose').addEventListener('click',closeDateModal);
+document.getElementById('dateModal').addEventListener('click',e=>{ if(e.target.id==='dateModal') closeDateModal(); });
+document.getElementById('mcalPrev').addEventListener('click',()=>{ mcalMonth--; if(mcalMonth<0){mcalMonth=11;mcalYear--;} renderMcal(); });
+document.getElementById('mcalNext').addEventListener('click',()=>{ mcalMonth++; if(mcalMonth>11){mcalMonth=0;mcalYear++;} renderMcal(); });
+
+function flashActivity(actId){
+  requestAnimationFrame(()=>{
+    const el=document.querySelector('#itinerary [data-act-id="'+actId+'"]');
+    if(!el) return;
+    el.scrollIntoView({behavior:'smooth',block:'center'});
+    el.classList.add('flash-highlight');
+    setTimeout(()=>el.classList.remove('flash-highlight'),2900);
+  });
+}
+function goToActivity(actId){
+  activateView('itin');
+  window.scrollTo({top:0,left:0,behavior:'instant'});
+  flashActivity(actId);
+}
+function goToDay(iso){
+  activateView('itin');
+  window.scrollTo({top:0,left:0,behavior:'instant'});
+  requestAnimationFrame(()=>{
+    const el=document.querySelector('#itinerary .day[data-day-iso="'+iso+'"]');
+    if(!el) return;
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    el.classList.add('flash-highlight');
+    setTimeout(()=>el.classList.remove('flash-highlight'),2900);
+  });
+}
+
+/* ===== VISTA CALENDARIO ===== */
+let calViewYear=parseInt(MIN_ISO.slice(0,4),10), calViewMonth=parseInt(MIN_ISO.slice(5,7),10)-1;
+function renderCalendarView(){
+  document.getElementById('calMonthLabel').textContent=MONTH_NAMES_ES[calViewMonth]+' '+calViewYear;
+  const minY=parseInt(MIN_ISO.slice(0,4),10), minM=parseInt(MIN_ISO.slice(5,7),10)-1;
+  const maxY=parseInt(MAX_ISO.slice(0,4),10), maxM=parseInt(MAX_ISO.slice(5,7),10)-1;
+  document.getElementById('calPrevMonth').disabled=(calViewYear<minY)||(calViewYear===minY&&calViewMonth<=minM);
+  document.getElementById('calNextMonth').disabled=(calViewYear>maxY)||(calViewYear===maxY&&calViewMonth>=maxM);
+  const grid=document.getElementById('calGrid'); grid.innerHTML='';
+  const maxShow=3;
+  monthMatrix(calViewYear,calViewMonth).forEach(day=>{
+    if(day===null){ const pad=document.createElement('div'); pad.className='calview-cell pad'; grid.appendChild(pad); return; }
+    const iso=isoOf(calViewYear,calViewMonth,day);
+    const stateDay=STATE.find(d=>d.iso===iso);
+    const cell=document.createElement('div');
+    if(!stateDay){
+      cell.className='calview-cell flight';
+      cell.innerHTML='<span class="cv-num">'+day+'</span><span class="cv-flight-tag">✈️ Sin plan</span>';
+    }else{
+      cell.className='calview-cell hasday';
+      const chips=stateDay.acts.slice(0,maxShow).map(a=>'<button type="button" class="cv-chip" data-act-id="'+a.id+'">'+a.n+'</button>').join('');
+      const more=stateDay.acts.length>maxShow?'<button type="button" class="cv-more" data-day-iso="'+iso+'">+'+(stateDay.acts.length-maxShow)+' mas</button>':'';
+      cell.innerHTML='<span class="cv-num">'+day+'</span>'+chips+more+
+        '<button type="button" class="cv-daylink" data-day-iso="'+iso+'">Ver dia completo →</button>';
+    }
+    grid.appendChild(cell);
+  });
+}
+document.getElementById('calGrid').addEventListener('click',e=>{
+  const chip=e.target.closest('.cv-chip');
+  if(chip){ goToActivity(chip.dataset.actId); return; }
+  const dayBtn=e.target.closest('.cv-daylink, .cv-more');
+  if(dayBtn){ goToDay(dayBtn.dataset.dayIso); return; }
+});
+document.getElementById('calPrevMonth').addEventListener('click',()=>{ calViewMonth--; if(calViewMonth<0){calViewMonth=11;calViewYear--;} renderCalendarView(); });
+document.getElementById('calNextMonth').addEventListener('click',()=>{ calViewMonth++; if(calViewMonth>11){calViewMonth=0;calViewYear++;} renderCalendarView(); });
+document.getElementById('calResetBtn').addEventListener('click',()=>{
+  if(confirm('¿Restablecer el itinerario a la organizacion original? Esto deshara todos los cambios de fecha que hayas hecho en este dispositivo.')) resetOverrides();
+});
 
 /* ===== CHECKLIST ===== */
 const PREP=[
@@ -952,6 +1352,6 @@ function updateVisitProg(){
 }
 
 /* ===== INIT ===== */
-renderItinerary(); renderPrep(); renderVisit();
+renderItinerary(); renderPrep(); renderVisit(); renderCalendarView(); updateCalChangesNote();
 </script>
 </body></html>
