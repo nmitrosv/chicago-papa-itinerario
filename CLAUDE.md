@@ -20,3 +20,11 @@ These are mistakes actually made in this repo — read before touching CSS/layou
 4. **Keyboard focus styles must exist on every page of a multi-page project, not just one.** `index.html` had `:focus-visible` outline rules; `menu-papa.html` didn't. When two pages share a design system, audit both for the same baseline a11y rules (focus outlines, contrast, alt text) — it's easy to add something once and forget to port it when a second page is created later.
 
 5. **When a user reports something looks "cut off" or "misaligned" at an edge, suspect scroll-container edge-clipping first**, especially on a horizontally scrollable row on iOS — it's a narrower, more specific diagnosis than generic "spacing is off," and shrinking everything (lesson #3) is the wrong fix for it.
+
+## Workflow
+
+This repo gets worked on across many separate Claude Code sessions (the user runs several in parallel/sequence). Because of that:
+
+- **Always tell the user explicitly when work is done and ready** — don't leave them to ask "ready?"/"is it live?". After finishing a change (and especially after merging to `master`, since that's what GitHub Pages serves), send a clear done/ready signal summarizing what shipped.
+- If you claimed something was published, proactively confirm the GitHub Pages deployment for that commit actually succeeded (check the `pages build and deployment` workflow run for the commit SHA) rather than assuming the push alone means it's live.
+- Before merging to `master`, fetch it first — other sessions land commits here often, and `master` may have moved since your branch started. Diverged history is normal in this repo, not a sign something went wrong.
