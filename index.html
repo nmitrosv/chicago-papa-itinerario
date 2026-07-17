@@ -207,14 +207,19 @@ footer b{color:#fff;}
 footer .wrap{display:flex;flex-direction:column;gap:8px;}
 footer a{color:#9fc4dd;}
 
-/* ===== Franja de acceso al Calendario ===== */
-.calstrip{background:var(--aegean-l);border-bottom:1px solid var(--line);}
-.calstrip .wrap{padding:12px 20px;display:flex;justify-content:center;}
+/* ===== Boton flotante de acceso al Calendario ===== */
+.calstrip{position:fixed;left:0;right:0;bottom:0;z-index:550;background:none;border:none;
+  display:flex;justify-content:center;pointer-events:none;
+  padding:14px 20px calc(14px + env(safe-area-inset-bottom,0px));}
+.calstrip .wrap{padding:0;display:flex;justify-content:center;pointer-events:none;}
 .calbtn{font-size:15px;font-weight:800;border:1.5px solid var(--aegean);background:var(--white);color:var(--aegean-d);
-  padding:11px 22px;border-radius:30px;cursor:pointer;transition:.18s;box-shadow:var(--shadow);
-  display:inline-flex;align-items:center;gap:8px;min-height:46px;}
-.calbtn:hover{background:var(--aegean);color:#fff;}
+  padding:13px 24px;border-radius:30px;cursor:pointer;transition:.18s;
+  box-shadow:0 14px 32px -10px rgba(7,82,132,.65),0 3px 10px rgba(0,0,0,.18);
+  display:inline-flex;align-items:center;gap:8px;min-height:48px;pointer-events:auto;}
+.calbtn:hover{background:var(--aegean);color:#fff;transform:translateY(-2px);
+  box-shadow:0 18px 36px -10px rgba(7,82,132,.7),0 4px 12px rgba(0,0,0,.2);}
 .calbtn.active{background:var(--aegean);color:#fff;}
+.calbtn[hidden]{display:none;}
 
 /* ===== Boton de cambiar fecha en cada actividad ===== */
 .act-datebar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;
@@ -319,7 +324,6 @@ nav.tabs, nav.tabs .wrap, .maplink, .minibtn, .loccard, .loc-body,
 .calview-cell, .mcal-cell{
   background-color:#ffffff !important;
 }
-.calstrip{background-color:#e6f1fa !important;}
 .calview-cell.flight, .mcal-cell{background-color:#f6f9fb !important;}
 .calbtn.active, .calbtn:hover{background-color:#0a6ebd !important;}
 .mcal-cell.current{background-color:#0a6ebd !important;}
@@ -955,10 +959,12 @@ function updateCalChangesNote(){
 function activateView(viewKey){
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
-  document.getElementById('calStripBtn').classList.remove('active');
+  const calBtn=document.getElementById('calStripBtn');
+  calBtn.classList.remove('active');
   const tabBtn=document.querySelector('.tab[data-view="'+viewKey+'"]');
-  if(tabBtn) tabBtn.classList.add('active'); else document.getElementById('calStripBtn').classList.add('active');
+  if(tabBtn) tabBtn.classList.add('active'); else calBtn.classList.add('active');
   document.getElementById('view-'+viewKey).classList.add('active');
+  calBtn.hidden=(viewKey==='cal');
   if(viewKey==='map'){ ensureMap(); if(map) setTimeout(()=>map.invalidateSize(),80); }
   if(viewKey==='cal'){ renderCalendarView(); }
 }
